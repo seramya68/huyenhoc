@@ -251,9 +251,153 @@
 
     <script>
         // DỮ LIỆU CŨ CỦA BÀ
-        const Data = {
-            'pt': `... (Phần này bà giữ nguyên lại Data cũ nha, tui rút gọn để code đỡ dài)`,
-            // ... copy tiếp các nội dung của tv, kd, ls, cx, dl vào đây
+const Data = {
+            'pt': `
+                <h2>🔮 PHONG THỦY ỨNG DỤNG<br><span style="font-size:16px; color:#fff;">CẢI VẬN THỰC TẾ 🔮</span></h2>
+                <div class="intro-text">"Áp dụng đồng thời 5 phương pháp: Loan Đầu – Bát Trạch – Huyền Không Phi Tinh – Huyền Không Đại Quái – Liên Thành phái, giúp đưa ra giải pháp tối ưu và phù hợp nhất cho từng ngôi nhà."</div>
+                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Nhận tư vấn và xử lý toàn diện phong thủy Dương trạch (nhà ở) và Âm trạch (mộ phần): Nhà mới làm cho đẹp – nhà cũ chỉnh cho hợp.</div>
+                
+                <h4><i class="fa-solid fa-house-chimney"></i> Dương trạch:</h4>
+                <ul>
+                    <li>Bố trí cửa chính đón tài – lộc – quý nhân</li>
+                    <li>Đặt bếp kích tài, tụ khí</li>
+                    <li>Điều chỉnh nước đến – nước đi tránh hao tài</li>
+                    <li>Sắp xếp giường ngủ ổn định sức khỏe</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-yin-yang"></i> Âm trạch:</h4>
+                <ul>
+                    <li>Đặt mộ theo phương pháp truyền thống kết hợp thực tế</li>
+                    <li>Điều chỉnh hướng mộ để phát con cháu</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-bullseye"></i> Quan điểm:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Hạn chế đập phá, tận dụng hiện trạng, điều chỉnh tinh tế để đạt hiệu quả cao.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ Nhận tư vấn từ đầu, quy hoạch nghĩa trang, thiết kế nhà thờ họ theo nguyên lý chuẩn.
+                </div>
+            `,
+            'tv': `
+                <h2>TỬ VI – LUẬN GIẢI CUỘC ĐỜI<br><span style="font-size:16px; color:#fff;">& ĐỊNH HƯỚNG VẬN MỆNH</span></h2>
+                <div class="intro-text">"Kết hợp tinh hoa Nam Phái Tam Hợp và Tứ Hóa Tam Hợp phái, đồng thời thực hiện đối soát giờ sinh để đảm bảo độ chính xác cao nhất."</div>
+                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Từ đó đưa ra cái nhìn tổng thể về cuộc đời gia chủ trên nhiều phương diện: hoàn cảnh, môi trường, năng lực, sức khỏe và vận trình phát triển.</div>
+                
+                <h4><i class="fa-solid fa-book-open"></i> Nội dung phân tích:</h4>
+                <ul>
+                    <li>Hoàn cảnh sinh ra và cách ứng xử với thuận – nghịch cảnh</li>
+                    <li>Môi trường sống, cơ hội và xung đột</li>
+                    <li>Năng lực bản thân và nền tảng sức khỏe</li>
+                    <li>Định hướng vận mệnh theo hướng chủ động</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-lightbulb"></i> Quan điểm:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Không phụ thuộc số mệnh, mà điều hướng để tối ưu vận trình.</li>
+                    <li style="color: #e2e8f0;">🔍 Kết hợp quẻ Kinh Dịch để kiểm chứng các mốc quan trọng.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ <b>Dịch vụ đặc biệt:</b> Tư vấn chọn thời điểm sinh con, đảm bảo hài hòa và tạo nền tảng tốt cho tương lai.
+                </div>
+            `,
+            'kd': `
+                <h2>KINH DỊCH – LUẬN QUẺ<br><span style="font-size:16px; color:#fff;">DẪN ĐƯỜNG QUYẾT ĐỊNH</span></h2>
+                <div class="intro-text">"Kinh Dịch không chỉ dùng để dự đoán mà là công cụ giúp phân tích và đưa ra quyết định trong thực tế."</div>
+                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Áp dụng song song Lục Hào và Mai Hoa giúp nhìn rõ bản chất sự việc và các hướng xử lý.</div>
+                
+                <h4><i class="fa-solid fa-chart-line"></i> Nội dung luận giải:</h4>
+                <ul>
+                    <li>Luận diễn biến: hiện tại – tương lai – kết quả</li>
+                    <li>Nhận diện yếu tố bên trong – bên ngoài</li>
+                    <li>Đánh giá năng lực bản thân khi xử lý việc</li>
+                    <li>Lựa chọn trong 384 phương pháp và kiểm chứng ngay</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-briefcase"></i> Ứng dụng:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Ứng dụng trong công việc, tài chính, quan hệ, doanh nghiệp.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ <b>Đặc biệt:</b><br>
+                    - Không chỉ xem mà đưa ra hướng xử lý cụ thể.<br>
+                    - Có thể kiểm tra trước kết quả của từng phương án.<br>
+                    - Giúp gia chủ chủ động và giảm thiểu rủi ro.
+                </div>
+            `,
+            'ls': `
+                <h2>LỤC SỰ – CHỌN NGÀY GIỜ<br><span style="font-size:16px; color:#fff;">& DỤNG SỰ CHÍNH XÁC</span></h2>
+                <div class="intro-text">"Lục sự là phương pháp xác định thời điểm phù hợp để thực hiện công việc, giúp tăng thuận lợi và giảm rủi ro trong mọi việc lớn nhỏ."</div>
+                
+                <h4><i class="fa-solid fa-calendar-check"></i> Nội dung dụng sự:</h4>
+                <ul>
+                    <li>Chọn ngày cưới hỏi, động thổ, khai trương, xuất hành</li>
+                    <li>Chọn ngày tang lễ, xây mộ, bốc mộ</li>
+                    <li>Đánh giá vận hạn, tên tuổi, CCCD, số điện thoại</li>
+                    <li>Đặt tên theo quy luật cổ truyền</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-layer-group"></i> Ứng dụng:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Áp dụng linh hoạt cho cả dương sự và âm phần.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ <b>Đặc biệt:</b><br>
+                    - Xử lý các trường hợp bắt buộc phải làm nhưng chưa có thời điểm đẹp.<br>
+                    - Hóa giải trùng tang liên táng.<br>
+                    - Kết hợp nhiều phương pháp để đưa ra thời điểm tối ưu.
+                </div>
+            `,
+            'cx': `
+                <h2>CẢM XẠ – ĐO NĂNG LƯỢNG<br><span style="font-size:16px; color:#fff;">& KIỂM TRA ÂM DƯƠNG</span></h2>
+                <div class="intro-text">"Cảm xạ là phương pháp kiểm tra năng lượng thực tế bằng gậy tầm long, con lắc và các công cụ hỗ trợ nhằm xác định đúng – sai một cách trực tiếp."</div>
+                
+                <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Ứng dụng kiểm tra:</h4>
+                <ul>
+                    <li>Kiểm tra vị trí cửa, bếp, bàn thờ, cầu thang</li>
+                    <li>Đánh giá môi trường xung quanh: nước, kim loại, tâm linh</li>
+                    <li>Đối chiếu với phong thủy để xác định nguyên nhân</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-shield-halved"></i> Tiêu chí:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Kiểm chứng nhiều bước để đảm bảo độ chính xác.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ <b>Đặc biệt:</b><br>
+                    - Có thể kiểm tra lại bằng vật do gia chủ cung cấp.<br>
+                    - Hỗ trợ giao tiếp với phần âm theo phương pháp kiểm soát.<br>
+                    - Tránh nhiễu thông tin, tăng độ tin cậy khi xử lý.
+                </div>
+            `,
+            'dl': `
+                <h2>🔮 CÚNG – LẬP ĐÀN LỄ<br><span style="font-size:16px; color:#fff;">ÂM DƯƠNG 🔮</span></h2>
+                <div class="intro-text">"Cúng lễ là phương pháp cuối cùng nhằm cân bằng âm dương khi các yếu tố khác chưa đủ để giải quyết vấn đề."</div>
+                
+                <h4><i class="fa-solid fa-hands-praying"></i> Các nghi lễ thực hiện:</h4>
+                <ul>
+                    <li>Thực hiện các lễ: động thổ, nhập trạch, cầu an, cầu tài</li>
+                    <li>Cúng mộ phần, tạ mộ, xử lý âm phần</li>
+                    <li>Triệu linh, tiếp linh theo từng trường hợp</li>
+                </ul>
+
+                <h4><i class="fa-solid fa-scale-balanced"></i> Phương pháp:</h4>
+                <ul style="list-style: none;">
+                    <li style="color: #e2e8f0;">👉 Kết hợp giữa truyền thống và phương pháp kiểm chứng.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    ✨ <b>Đặc biệt:</b><br>
+                    - Sử dụng đài âm dương và cảm xạ để kiểm tra liên tục.<br>
+                    - Quan sát 3 nén hương theo 24 cách cháy để nhận thông điệp.<br>
+                    - Có phương pháp riêng cho cúng bán đất, giải hạn tam tai – thái tuế.
+                </div>
+            `
         };
 
         const infoPanel = document.getElementById('infoPanel');
