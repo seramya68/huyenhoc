@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minh Triết Phương Đông - Huyền Học Xuân Trường</title>
+    <title>Huyền Gia Xuân Trường - Minh Triết Phương Đông</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -18,36 +18,88 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #e2e8f0; overflow-x: hidden;
         }
 
-        /* --- NAV & TAB CHUNG --- */
-        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.3); position: sticky; top: 0; z-index: 100; }
-        .logo-area { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: var(--gold); text-transform: uppercase; }
-        .logo-area img { width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(212,175,55,0.5)); }
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding-bottom: 5px; border-bottom: 2px solid transparent; }
+        /* --- THANH THÔNG BÁO CHẠY NGANG (MARQUEE) --- */
+        .marquee-container { width: 100%; background: #000; border-bottom: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 8px 0; overflow: hidden; white-space: nowrap; box-sizing: border-box; position: relative; display: flex; align-items: center; z-index: 101; }
+        .marquee-content { display: inline-block; font-size: 13px; font-style: italic; animation: marquee 25s linear infinite; }
+        .marquee-content:hover { animation-play-state: paused; }
+        .marquee-content span { margin-right: 50px; }
+        .marquee-content i { color: var(--gold); margin-right: 5px; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* --- NAV CHIA 2 BÊN --- */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 175, 55, 0.4); position: sticky; top: 0; z-index: 100; height: 100px; }
+        .logo-area { width: 35%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; cursor: pointer; }
+        .logo-text { color: var(--gold); font-size: 20px; font-weight: 900; text-transform: uppercase; line-height: 1.2; letter-spacing: 2px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        .logo-text .text-huyengia { color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 4px; }
+        .logo-area img { height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0 0 15px rgba(212,175,55,0.6)); transition: 0.3s; }
+        .logo-area:hover img { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(212,175,55,1)); }
+        .nav-right-area { width: 65%; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 10px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; white-space: nowrap; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 15px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding-bottom: 5px; border-bottom: 2px solid transparent; }
         .nav-links a:hover, .nav-links a.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
         .btn-join { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #000 !important; padding: 8px 20px !important; border-radius: 5px; border: none !important; font-weight: bold; }
+        .btn-join:hover { filter: brightness(1.1); transform: translateY(-2px); }
         .btn-admin-mode { background: linear-gradient(135deg, #1e293b, #0f172a); color: var(--gold) !important; border: 1px solid var(--gold) !important; pointer-events: none; }
-        
-        .tab-content { display: none; width: 100%; max-width: 1200px; margin: 0 auto; padding: 40px 20px; box-sizing: border-box; }
+        .nav-slogan { font-size: 13px; color: #ffffff; font-weight: normal; font-style: italic; letter-spacing: 1px; white-space: nowrap; }
+
+        /* --- QUẢN LÝ TAB & LAYOUT CHUNG --- */
+        .tab-content { display: none; width: 100%; max-width: 1200px; margin: 0 auto; padding: 40px 20px; box-sizing: border-box; min-height: 75vh;}
         .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-header { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 50px; margin-top: 10px;}
+        .section-header::before, .section-header::after { content: ""; height: 1px; width: 80px; background: rgba(212, 175, 55, 0.5); }
+        .section-header h2 { color: var(--gold); font-size: 26px; text-transform: uppercase; margin: 0; letter-spacing: 3px; text-shadow: 0 0 10px rgba(212,175,55,0.3);}
+        
+        /* --- HIỆU ỨNG SÁU CÁNH CỬA --- */
+        @keyframes goldPulse { 0% { filter: drop-shadow(0 0 5px rgba(212,175,55,0.3)); } 50% { filter: drop-shadow(0 0 18px rgba(212,175,55,0.7)); } 100% { filter: drop-shadow(0 0 5px rgba(212,175,55,0.3)); } }
+        .hexagon-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; padding: 20px 0;}
+        .hex-btn { width: 120px; height: 135px; background: var(--gold); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); animation: goldPulse 3s infinite; }
+        .hex-inner { width: 116px; height: 131px; background: rgba(10, 14, 23, 0.95); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; transition: 0.4s; }
+        .hex-btn:hover { transform: translateY(-15px) scale(1.08); animation: none; filter: drop-shadow(0 0 30px rgba(212,175,55,1)); z-index: 10;}
+        .hex-btn:hover .hex-inner { background: rgba(212, 175, 55, 0.15); }
+        .hex-inner i { font-size: 32px; color: var(--gold); margin-bottom: 12px; transition: 0.3s; }
+        .hex-btn:hover .hex-inner i { transform: scale(1.2); color: var(--gold-light); text-shadow: 0 0 15px var(--gold-light); }
+        .hex-inner span { font-size: 13px; font-weight: bold; text-align: center; text-transform: uppercase; line-height: 1.4; letter-spacing: 1px; }
 
-        /* --- TRANG CHỦ --- */
-        .section-header { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 40px; margin-top: 10px;}
-        .section-header::before, .section-header::after { content: ""; height: 1px; width: 60px; background: rgba(212, 175, 55, 0.5); }
-        .section-header h2 { color: var(--gold); font-size: 24px; text-transform: uppercase; margin: 0; letter-spacing: 2px;}
-        .hexagon-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
-        .hex-btn { width: 110px; height: 120px; background: var(--gold); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.4s; }
-        .hex-inner { width: 106px; height: 116px; background: #0a0e17; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; transition: 0.4s; }
-        .hex-btn:hover { transform: translateY(-10px); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); }
-        .hex-btn:hover .hex-inner { background: rgba(212, 175, 55, 0.1); }
-        .hex-inner i { font-size: 30px; color: var(--gold); margin-bottom: 8px; }
-        .hex-inner span { font-size: 12px; font-weight: bold; text-align: center; text-transform: uppercase; line-height: 1.3; }
-        .hero-section { text-align: center; margin: 0 auto 60px auto; padding: 25px 40px; background: rgba(0, 0, 0, 0.4); border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 15px; max-width: 700px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .hero-section h1 { color: var(--gold); font-size: 20px; line-height: 1.4; text-transform: uppercase; letter-spacing: 2px; margin-top: 0; margin-bottom: 10px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
-        .hero-section p { color: #cbd5e1; font-size: 14px; font-style: italic; margin: 0; line-height: 1.6; }
+        /* DANH SÁCH BÀI VIẾT (FORUM) */
+        .news-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .news-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .news-date { font-size: 12px; color: var(--text-gray); margin-bottom: 5px; }
+        .news-title { font-size: 16px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .news-title:hover { color: var(--gold); }
 
-        /* MODAL THÔNG TIN LỤC TRẬN ĐỒ */
+        .forum-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .forum-post { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;}
+        .forum-post:hover { background: rgba(255,255,255,0.08); }
+        .forum-meta { font-size: 12px; color: var(--text-gray); margin-bottom: 10px; display: flex; justify-content: space-between;}
+        .forum-category { background: rgba(212,175,55,0.2); color: var(--gold); padding: 2px 8px; border-radius: 5px; border: 1px solid var(--gold); font-size: 11px;}
+        .forum-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--gold-light);}
+        .forum-content { font-size: 14.5px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;}
+
+        /* --- CSS MỚI: TÍNH NĂNG LIKE & COMMENT --- */
+        .forum-actions { display: flex; gap: 25px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .btn-action { background: transparent; border: none; color: var(--text-gray); font-size: 14px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px; padding: 0; font-weight: bold;}
+        .btn-action:hover { color: var(--gold); }
+        
+        .comment-section { margin-top: 15px; background: rgba(0,0,0,0.4); border-radius: 8px; padding: 15px; border: 1px solid rgba(212,175,55,0.15); }
+        .comment-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; max-height: 250px; overflow-y: auto; padding-right: 5px;}
+        .comment-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; font-size: 13.5px; color: #cbd5e1; line-height: 1.5;}
+        .teacher-comment { border-left: 3px solid var(--gold); background: rgba(212,175,55,0.15); color: #fff;}
+        .comment-author { font-weight: bold; color: var(--gold-light); margin-bottom: 4px; display: flex; align-items: center;}
+        
+        .comment-input-area { display: flex; gap: 10px; }
+        .comment-input-area input { flex: 1; padding: 10px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.6); color: white; outline: none; font-size: 13px;}
+        .comment-input-area input:focus { border-color: var(--gold); }
+        .comment-input-area button { background: var(--gold); color: #000; border: none; padding: 0 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s;}
+        .comment-input-area button:hover { filter: brightness(1.1); transform: translateY(-1px);}
+
+        /* --- QUẢN LÝ BÀI CHO ADMIN --- */
+        .admin-post-card { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; border: 1px dashed var(--gold); margin-bottom: 15px;}
+        .admin-post-actions { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;}
+        .btn-approve { background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-delete { background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* --- CÁC FORM VÀ MODAL --- */
         .info-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%); width: 90%; max-width: 600px; max-height: 80vh; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 30px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.4s; z-index: 1000; }
         .info-panel.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
         .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
@@ -60,51 +112,42 @@
         .info-content li::before { content: '•'; position: absolute; left: 0; color: var(--gold); font-size: 18px; }
         .highlight-box { background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 15px; margin-top: 25px; border-radius: 0 8px 8px 0; color: #fef08a; }
 
-        /* --- GIAO DIỆN CHAT / ADMIN --- */
-        .chat-layout { display: flex; height: 75vh; gap: 20px; background: rgba(10, 15, 30, 0.8); border-radius: 15px; border: 1px solid rgba(212,175,55,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
-        .chat-sidebar { width: 250px; background: rgba(0,0,0,0.5); border-right: 1px solid rgba(212,175,55,0.1); display: flex; flex-direction: column; }
-        .chat-sidebar-header { padding: 20px; border-bottom: 1px solid rgba(212,175,55,0.1); color: var(--gold); font-weight: bold; text-align: center; text-transform: uppercase; font-size: 14px; }
-        .contact-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
-        .contact-item { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .contact-item:hover { background: rgba(212,175,55,0.1); }
-        .contact-item.active-contact { background: rgba(212,175,55,0.2); border-left: 4px solid var(--gold); }
-        .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: #1e293b; display: flex; justify-content: center; align-items: center; color: var(--gold); font-size: 16px; }
-        .contact-info h5 { margin: 0; font-size: 14px; color: #fff; }
-        .contact-info p { margin: 2px 0 0; font-size: 11px; color: #94a3b8; }
-        .chat-main { flex: 1; display: flex; flex-direction: column; }
-        .chat-main-header { padding: 15px; border-bottom: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.3); color: var(--gold); font-weight: bold; text-align: center;}
-        .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-input-area { padding: 15px; border-top: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.5); display: flex; gap: 10px; }
-        .chat-input { flex: 1; padding: 12px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color: white; outline: none; }
-        .chat-input:focus { border-color: var(--gold); }
-        .btn-submit { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #000; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .send-btn { background: var(--gold); color: #000; border: none; padding: 0 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-
-        /* --- FORM ĐĂNG NHẬP --- */
         .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 60vh; }
-        .login-box { background: var(--glass-bg); border: 1px solid var(--gold); border-radius: 15px; padding: 30px; width: 100%; max-width: 400px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); text-align: center; }
+        .login-box { background: var(--glass-bg); border: 1px solid var(--gold); border-radius: 15px; padding: 30px; width: 100%; max-width: 500px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); text-align: center; }
         .login-box h2 { color: var(--gold); margin-top: 0; text-transform: uppercase; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 15px; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; color: #cbd5e1; font-size: 13px; margin-bottom: 5px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(0, 0, 0, 0.6); color: #fff; outline: none; box-sizing: border-box; font-family: inherit; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
         .form-row { display: flex; gap: 15px; } .form-row .form-group { flex: 1; }
+        .btn-submit { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #000; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
 
-        /* --- CSS CHO DIỄN ĐÀN --- */
-        .forum-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .forum-post { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;}
-        .forum-post:hover { background: rgba(255,255,255,0.08); }
-        .forum-meta { font-size: 12px; color: var(--text-gray); margin-bottom: 10px; display: flex; justify-content: space-between;}
-        .forum-category { background: rgba(212,175,55,0.2); color: var(--gold); padding: 2px 8px; border-radius: 5px; border: 1px solid var(--gold); font-size: 11px;}
-        .forum-title { font-size: 18px; color: #fff; font-weight: bold; margin-bottom: 10px; color: var(--gold-light);}
-        .forum-content { font-size: 14.5px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;}
+        /* GIAO DIỆN CHAT CHUNG & BỘ LỌC */
+        .chat-layout { display: flex; height: 75vh; gap: 20px; background: rgba(10, 15, 30, 0.8); border-radius: 15px; border: 1px solid rgba(212,175,55,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
+        .chat-sidebar { width: 250px; background: rgba(0,0,0,0.5); border-right: 1px solid rgba(212,175,55,0.1); display: flex; flex-direction: column; }
+        .chat-sidebar-header { padding: 20px; border-bottom: 1px solid rgba(212,175,55,0.1); color: var(--gold); font-weight: bold; text-align: center; text-transform: uppercase; font-size: 14px; }
+        .contact-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex: 1; }
+        .contact-item { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; position: relative; }
+        .contact-item:hover { background: rgba(212,175,55,0.1); }
+        .contact-item.active-contact { background: rgba(212,175,55,0.2); border-left: 4px solid var(--gold); }
+        .contact-item.hidden { display: none !important; }
+        .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: #1e293b; display: flex; justify-content: center; align-items: center; color: var(--gold); font-size: 16px; }
+        .contact-info h5 { margin: 0; font-size: 14px; color: #fff; }
+        .contact-info p { margin: 2px 0 0; font-size: 11px; color: #94a3b8; }
         
-        .admin-post-card { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; border: 1px dashed var(--gold); margin-bottom: 15px;}
-        .admin-post-actions { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;}
-        .btn-approve { background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .btn-delete { background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .unread-badge { background: #ef4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
+        
+        .filter-group { display: flex; gap: 5px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .filter-btn { flex: 1; padding: 5px; background: rgba(255,255,255,0.05); color: var(--text-gray); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; cursor: pointer; font-size: 12px; transition: 0.3s; }
+        .filter-btn.active { background: rgba(212,175,55,0.2); color: var(--gold); border-color: var(--gold); font-weight: bold;}
 
-        /* Cột 3 Admin */
+        .chat-main { flex: 1; display: flex; flex-direction: column; }
+        .chat-main-header { padding: 15px; border-bottom: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.3); color: var(--gold); font-weight: bold; text-align: center;}
+        .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .chat-input-area { padding: 15px; border-top: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.5); display: flex; gap: 10px; }
+        .chat-input { flex: 1; padding: 12px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color: white; outline: none; }
+        .chat-input:focus { border-color: var(--gold); }
+
         .chat-info-sidebar { width: 280px; background: rgba(0,0,0,0.6); border-left: 1px solid rgba(212,175,55,0.2); display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; transition: 0.3s; opacity: 0.5; pointer-events: none;}
         .chat-info-sidebar h4 { color: var(--gold); text-align: center; margin-top: 0; border-bottom: 1px dashed var(--gold); padding-bottom: 10px; font-size: 16px;}
         .customer-details { font-size: 13px; color: #cbd5e1; line-height: 1.8; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(212,175,55,0.1);}
@@ -116,24 +159,66 @@
         .save-notes-btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 10px; margin-top: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
         .save-notes-btn:hover { background: var(--gold); color: #000; }
 
-        footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;}
+        footer { text-align: center; padding: 30px 20px; color: var(--text-gray); font-size: 13px; border-top: 1px dashed rgba(212,175,55,0.3); margin-top: auto; letter-spacing: 2px; text-transform: uppercase;}
+
+        /* --- ÉP GIAO DIỆN MOBILE --- */
+        @media (max-width: 768px) {
+            .top-nav { flex-direction: column; height: auto; padding: 15px; gap: 15px; align-items: center; }
+            .logo-area { width: 100%; justify-content: center; text-align: center; }
+            .nav-right-area { width: 100%; align-items: center; }
+            .nav-links { overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 10px; gap: 10px; }
+            .nav-links a { font-size: 14px; }
+            .nav-slogan { font-size: 11px; white-space: normal; text-align: center; }
+            .hexagon-grid { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; gap: 15px; }
+            .hex-btn { width: 100%; max-width: 140px; height: 120px; }
+            .chat-layout { flex-direction: column; height: 85vh; }
+            .chat-sidebar, .chat-info-sidebar { width: 100% !important; max-height: 250px; overflow-y: auto; }
+            .chat-main { height: 400px; }
+            .form-row { flex-direction: column; gap: 0; }
+            .form-group div[style*="display: flex"] { flex-direction: column; gap: 5px !important; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="marquee-container">
+        <div class="marquee-content" id="marqueeContent">
+            <span id="mq-default"><i class="fa-solid fa-fire"></i> Mọi thông tin xin vui lòng đăng nhập hoặc liên hệ Zalo 0919935919 để được hỗ trợ.</span>
+            <span id="mq-post" style="display:none;"></span>
+            <span id="mq-user" style="display:none;"></span>
+        </div>
+    </div>
+
     <nav class="top-nav">
-        <div class="logo-area"><img src="assets/logo.png" alt="Logo"> HUYỀN HỌC XUÂN TRƯỜNG</div>
-        <div class="nav-links">
-            <a class="nav-item active" onclick="switchMainTab('tab-home', this)">TRANG CHỦ</a>
-            <a class="nav-item" onclick="document.getElementById('sau-canh-cua').scrollIntoView({behavior: 'smooth'})">SÁU CÁNH CỬA</a>
-            <a class="nav-item" onclick="switchMainTab('tab-forum', this)">GÓC DIỄN ĐÀN</a>
-            <a class="nav-item" onclick="requireLogin(this)">GÓC ĐÀM ĐẠO</a>
-            <a id="navJoinBtn" class="btn-join" onclick="requireLogin(this)">GIA NHẬP</a>
+        <div class="logo-area" onclick="switchMainTab('tab-home', document.querySelectorAll('.nav-links a')[0])">
+            <img src="assets/logo.png" alt="Logo Huyền Học">
+            <div class="logo-text">
+                <span class="text-huyengia">Huyền Gia</span><br>
+                XUÂN TRƯỜNG
+            </div>
+        </div>
+        
+        <div class="nav-right-area">
+            <div class="nav-links">
+                <a class="btn-join" onclick="switchMainTab('tab-home', this)">TRANG CHỦ</a>
+                <a class="nav-item" onclick="switchMainTab('tab-dichvu', this)">DỊCH VỤ</a>
+                <a class="nav-item" onclick="switchMainTab('tab-forum', this)">BÀI VIẾT</a>
+                <a class="nav-item" onclick="requireLogin(this)">DIỄN ĐÀN</a>
+                <a id="navJoinBtn" class="btn-join" onclick="requireLogin(this)">ĐĂNG NHẬP</a>
+            </div>
+            <div class="nav-slogan">Thiên khai Kinh Tế - Địa định Phong Cảm - Nhân luận Tử Lục</div>
         </div>
     </nav>
 
     <div id="tab-home" class="tab-content active">
-        <div class="section-header" id="sau-canh-cua"><h2>SÁU CÁNH CỬA</h2></div>
+        <div class="section-header"><h2>MỚI CẬP NHẬT</h2></div>
+        <div class="news-list" id="homeLatestPosts">
+            <div style="text-align:center; color:#94a3b8;">Đang tải bài viết mới nhất...</div>
+        </div>
+    </div>
+
+    <div id="tab-dichvu" class="tab-content">
+        <div class="section-header"><h2>SÁU CÁNH CỬA</h2></div>
         <div class="hexagon-grid">
             <div class="hex-btn" onclick="showInfo('pt')"><div class="hex-inner"><i class="fa-solid fa-compass"></i><span>Phong<br>Thủy</span></div></div>
             <div class="hex-btn" onclick="showInfo('tv')"><div class="hex-inner"><i class="fa-solid fa-star-and-crescent"></i><span>Tử<br>Vi</span></div></div>
@@ -142,42 +227,27 @@
             <div class="hex-btn" onclick="showInfo('dl')"><div class="hex-inner"><i class="fa-solid fa-hands-praying"></i><span>Cúng<br>Lễ</span></div></div>
             <div class="hex-btn" onclick="showInfo('ls')"><div class="hex-inner"><i class="fa-solid fa-crystal-ball"></i><span>Lục<br>Sự</span></div></div>
         </div>
-
-        <div class="hero-section">
-            <h1>TĨNH TRUNG KIẾN TÍNH - HUYỀN CƠ TỰ ĐÁO</h1>
-            <p>"Trong cái tĩnh lặng của tâm hồn, ta thấy được bản chất của vạn vật. Khi ấy, cơ trời tự khắc hiển lộ..."</p>
-        </div>
-
-        <div class="section-header"><h2>MỚI CẬP NHẬT</h2></div>
-        <div class="news-list" id="homeLatestPosts">
-            <div style="text-align:center; color:#94a3b8;">Đang tải bài viết mới nhất...</div>
-        </div>
-
-        <div class="info-panel" id="infoPanel">
-            <button class="close-btn" onclick="closeInfo()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="info-content" id="infoContent"></div>
-        </div>
     </div>
 
     <div id="tab-forum" class="tab-content">
-        <div class="section-header"><h2>GÓC DIỄN ĐÀN</h2></div>
+        <div class="section-header"><h2>BÀI VIẾT</h2></div>
         
         <div style="text-align: center; margin-bottom: 30px;">
             <button class="btn-submit" style="width: auto; padding: 10px 30px; font-size: 14px;" onclick="openPostModal()">
-                <i class="fa-solid fa-pen-nib"></i> VIẾT BÀI MỚI (CHỜ DUYỆT)
+                <i class="fa-solid fa-pen-nib"></i> <span id="btnOpenPostText">VIẾT BÀI / ĐẶT CÂU HỎI</span>
             </button>
         </div>
 
         <div class="forum-list" id="publicForumList">
-            <div style="text-align:center; color:#94a3b8;">Đang tải diễn đàn...</div>
+            <div style="text-align:center; color:#94a3b8;">Đang tải danh sách bài viết...</div>
         </div>
 
         <div class="info-panel" id="postModal">
             <button class="close-btn" onclick="document.getElementById('postModal').classList.remove('show')"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="color: var(--gold); text-align: center; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 15px;">Viết Bài Mới</h2>
+            <h2 id="modalTitle" style="color: var(--gold); text-align: center; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 15px;">Viết Bài Mới</h2>
             
             <div class="form-group">
-                <label>Tiêu đề bài viết:</label>
+                <label id="titleLabel">Tiêu đề:</label>
                 <input type="text" id="postTitle" placeholder="Nhập tiêu đề...">
             </div>
             <div class="form-group">
@@ -192,27 +262,44 @@
                     <option value="Khác">Khác / Thảo luận chung</option>
                 </select>
             </div>
+            
+            <div class="form-group" id="guestOptions" style="display: none; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px dashed var(--gold);">
+                <label style="color: var(--gold); font-weight: bold; margin-bottom: 10px;"><i class="fa-solid fa-route"></i> Bạn muốn gửi câu hỏi này đi đâu?</label>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #e2e8f0; font-size: 13px;">
+                        <input type="radio" name="postDestination" value="public" checked style="width: 18px; height: 18px; padding: 0; border: none; background: transparent; margin: 0; appearance: auto;">
+                        <span><b>Đăng Diễn Đàn:</b> Hỏi công khai (Chờ Thầy duyệt)</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #e2e8f0; font-size: 13px;">
+                        <input type="radio" name="postDestination" value="private" style="width: 18px; height: 18px; padding: 0; border: none; background: transparent; margin: 0; appearance: auto;">
+                        <span><b>Hỏi Kín:</b> Nhắn tin riêng tư 1-1 với Thầy</span>
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
-                <label>Nội dung chia sẻ:</label>
+                <label id="contentLabel">Nội dung chi tiết:</label>
                 <textarea id="postContent" rows="6" placeholder="Viết nội dung vào đây..."></textarea>
             </div>
-            <button class="btn-submit" id="btnSubmitPost" onclick="submitPost()">Gửi Bài Chờ Thầy Duyệt</button>
+            <button class="btn-submit" id="btnSubmitPost" onclick="submitPost()">Gửi</button>
         </div>
     </div>
 
     <div id="tab-chat" class="tab-content">
-        
         <div id="loginSection" class="login-wrapper">
             <div class="login-box">
                 <h2>Nhập Môn</h2>
-                <div class="form-group">
-                    <label>Số điện thoại (Bắt buộc):</label>
-                    <input type="number" id="phoneInput" placeholder="VD: 09xxxxxxx">
-                </div>
-                
+                <div class="form-group"><label>Số điện thoại (Bắt buộc):</label><input type="number" id="phoneInput" placeholder="VD: 09xxxxxxx"></div>
                 <div id="newUserInfo" style="display: none;">
                     <div class="form-group"><label>Họ và Tên:</label><input type="text" id="nameInput" placeholder="Nhập tên của bạn"></div>
-                    <div class="form-group"><label>Địa chỉ (Sống ở đâu):</label><input type="text" id="addressInput" placeholder="VD: Vũng Tàu, TP.HCM..."></div>
+                    <div class="form-group">
+                        <label>Địa chỉ (Tỉnh/Thành - Quận/Huyện - Phường/Xã):</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select id="province" onchange="fetchDistricts(this.value)" style="flex: 1;"><option value="">Chọn Tỉnh/Thành</option></select>
+                            <select id="district" onchange="fetchWards(this.value)" style="flex: 1;" disabled><option value="">Quận/Huyện</option></select>
+                            <select id="ward" style="flex: 1;" disabled><option value="">Phường/Xã</option></select>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group"><label>Tuổi / Năm sinh:</label><input type="number" id="yearInput" placeholder="VD: 1990"></div>
                         <div class="form-group"><label>Ngày sinh:</label><input type="text" id="dobInput" placeholder="VD: 15/05"></div>
@@ -233,10 +320,7 @@
                     <li class="contact-item active-contact" id="btnClientPrivate" onclick="switchClientContact('Tư vấn với Thầy', this, 'private')">
                         <div class="contact-icon"><i class="fa-solid fa-user-tie"></i></div>
                         <div class="contact-info"><h5>Thầy Xuân Trường</h5><p>Tư vấn kín 1-1</p></div>
-                    </li>
-                    <li class="contact-item" onclick="switchClientContact('Kênh Trà Đạo Chung', this, 'global')">
-                        <div class="contact-icon"><i class="fa-solid fa-users"></i></div>
-                        <div class="contact-info"><h5>Kênh Chung</h5><p>Thảo luận mở</p></div>
+                        <div id="clientUnreadBadge" class="unread-badge"></div>
                     </li>
                 </ul>
             </div>
@@ -258,25 +342,22 @@
                         <div class="contact-icon" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;"><i class="fa-solid fa-clipboard-check"></i></div>
                         <div class="contact-info"><h5 style="color:#ef4444;">Duyệt Bài</h5><p>Quản lý diễn đàn</p></div>
                     </li>
-
-                    <li class="contact-item active-contact" id="btnAdminGlobal" onclick="switchAdminContact('Kênh Trà Đạo Chung', this, 'global', null, null)">
-                        <div class="contact-icon" style="background: rgba(212,175,55,0.2);"><i class="fa-solid fa-users"></i></div>
-                        <div class="contact-info"><h5>Kênh Trà Đạo Chung</h5><p>Thảo luận cộng đồng</p></div>
-                    </li>
-                    <div style="padding: 10px; font-size: 11px; color: var(--gold); text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">DANH BẠ KHÁCH HÀNG</div>
+                    <div style="padding: 10px; font-size: 11px; color: var(--gold); text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); margin-top: 10px;">DANH BẠ KHÁCH HÀNG</div>
+                    <div class="filter-group">
+                        <button class="filter-btn active" onclick="filterContacts('all', this)">Tất cả</button>
+                        <button class="filter-btn" onclick="filterContacts('unread', this)">Chưa đọc</button>
+                    </div>
                     <div id="dynamicUserList"></div>
                 </ul>
             </div>
             
             <div class="chat-main">
-                <div class="chat-main-header" id="adminChatTitle">Kênh Trà Đạo Chung</div>
-                
+                <div class="chat-main-header" id="adminChatTitle"></div>
                 <div id="adminChatBox" class="chat-box"></div>
                 <div class="chat-input-area" id="adminInputArea">
                     <input type="text" id="adminMsgInput" class="chat-input" placeholder="Nhập tin nhắn tư vấn..." onkeypress="handleAdminKeyPress(event)">
                     <button class="send-btn" onclick="sendAdminMessage()">Gửi</button>
                 </div>
-
                 <div id="adminApprovalBox" class="chat-box" style="display: none;"></div>
             </div>
 
@@ -290,160 +371,25 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <footer>Copyright © 2026 - Minh Triết Phương Đông.</footer>
+    <div class="info-panel" id="infoPanel">
+        <button class="close-btn" onclick="closeInfo()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="info-content" id="infoContent"></div>
+    </div>
+
+    <footer>Copyright © 2026 - Huyền Học Xuân Trường.</footer>
 
     <script>
         const Data = {
-            'pt': `
-                <h2>🔮 PHONG THỦY ỨNG DỤNG<br><span style="font-size:16px; color:#fff;">CẢI VẬN THỰC TẾ 🔮</span></h2>
-                <div class="intro-text">"Áp dụng đồng thời 5 phương pháp: Loan Đầu – Bát Trạch – Huyền Không Phi Tinh – Huyền Không Đại Quái – Liên Thành phái, giúp đưa ra giải pháp tối ưu và phù hợp nhất cho từng ngôi nhà."</div>
-                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Nhận tư vấn và xử lý toàn diện phong thủy Dương trạch (nhà ở) và Âm trạch (mộ phần): Nhà mới làm cho đẹp – nhà cũ chỉnh cho hợp.</div>
-                
-                <h4><i class="fa-solid fa-house-chimney"></i> Dương trạch:</h4>
-                <ul>
-                    <li>Bố trí cửa chính đón tài – lộc – quý nhân</li>
-                    <li>Đặt bếp kích tài, tụ khí</li>
-                    <li>Điều chỉnh nước đến – nước đi tránh hao tài</li>
-                    <li>Sắp xếp giường ngủ ổn định sức khỏe</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-yin-yang"></i> Âm trạch:</h4>
-                <ul>
-                    <li>Đặt mộ theo phương pháp truyền thống kết hợp thực tế</li>
-                    <li>Điều chỉnh hướng mộ để phát con cháu</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-bullseye"></i> Quan điểm:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Hạn chế đập phá, tận dụng hiện trạng, điều chỉnh tinh tế để đạt hiệu quả cao.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ Nhận tư vấn từ đầu, quy hoạch nghĩa trang, thiết kế nhà thờ họ theo nguyên lý chuẩn.
-                </div>
-            `,
-            'tv': `
-                <h2>TỬ VI – LUẬN GIẢI CUỘC ĐỜI<br><span style="font-size:16px; color:#fff;">& ĐỊNH HƯỚNG VẬN MỆNH</span></h2>
-                <div class="intro-text">"Kết hợp tinh hoa Nam Phái Tam Hợp và Tứ Hóa Tam Hợp phái, đồng thời thực hiện đối soát giờ sinh để đảm bảo độ chính xác cao nhất."</div>
-                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Từ đó đưa ra cái nhìn tổng thể về cuộc đời gia chủ trên nhiều phương diện: hoàn cảnh, môi trường, năng lực, sức khỏe và vận trình phát triển.</div>
-                
-                <h4><i class="fa-solid fa-book-open"></i> Nội dung phân tích:</h4>
-                <ul>
-                    <li>Hoàn cảnh sinh ra và cách ứng xử với thuận – nghịch cảnh</li>
-                    <li>Môi trường sống, cơ hội và xung đột</li>
-                    <li>Năng lực bản thân và nền tảng sức khỏe</li>
-                    <li>Định hướng vận mệnh theo hướng chủ động</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-lightbulb"></i> Quan điểm:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Không phụ thuộc số mệnh, mà điều hướng để tối ưu vận trình.</li>
-                    <li style="color: #e2e8f0;">🔍 Kết hợp quẻ Kinh Dịch để kiểm chứng các mốc quan trọng.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ <b>Dịch vụ đặc biệt:</b> Tư vấn chọn thời điểm sinh con, đảm bảo hài hòa và tạo nền tảng tốt cho tương lai.
-                </div>
-            `,
-            'kd': `
-                <h2>KINH DỊCH – LUẬN QUẺ<br><span style="font-size:16px; color:#fff;">DẪN ĐƯỜNG QUYẾT ĐỊNH</span></h2>
-                <div class="intro-text">"Kinh Dịch không chỉ dùng để dự đoán mà là công cụ giúp phân tích và đưa ra quyết định trong thực tế."</div>
-                <div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Áp dụng song song Lục Hào và Mai Hoa giúp nhìn rõ bản chất sự việc và các hướng xử lý.</div>
-                
-                <h4><i class="fa-solid fa-chart-line"></i> Nội dung luận giải:</h4>
-                <ul>
-                    <li>Luận diễn biến: hiện tại – tương lai – kết quả</li>
-                    <li>Nhận diện yếu tố bên trong – bên ngoài</li>
-                    <li>Đánh giá năng lực bản thân khi xử lý việc</li>
-                    <li>Lựa chọn trong 384 phương pháp và kiểm chứng ngay</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-briefcase"></i> Ứng dụng:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Ứng dụng trong công việc, tài chính, quan hệ, doanh nghiệp.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ <b>Đặc biệt:</b><br>
-                    - Không chỉ xem mà đưa ra hướng xử lý cụ thể.<br>
-                    - Có thể kiểm tra trước kết quả của từng phương án.<br>
-                    - Giúp gia chủ chủ động và giảm thiểu rủi ro.
-                </div>
-            `,
-            'ls': `
-                <h2>LỤC SỰ – CHỌN NGÀY GIỜ<br><span style="font-size:16px; color:#fff;">& DỤNG SỰ CHÍNH XÁC</span></h2>
-                <div class="intro-text">"Lục sự là phương pháp xác định thời điểm phù hợp để thực hiện công việc, giúp tăng thuận lợi và giảm rủi ro trong mọi việc lớn nhỏ."</div>
-                
-                <h4><i class="fa-solid fa-calendar-check"></i> Nội dung dụng sự:</h4>
-                <ul>
-                    <li>Chọn ngày cưới hỏi, động thổ, khai trương, xuất hành</li>
-                    <li>Chọn ngày tang lễ, xây mộ, bốc mộ</li>
-                    <li>Đánh giá vận hạn, tên tuổi, CCCD, số điện thoại</li>
-                    <li>Đặt tên theo quy luật cổ truyền</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-layer-group"></i> Ứng dụng:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Áp dụng linh hoạt cho cả dương sự và âm phần.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ <b>Đặc biệt:</b><br>
-                    - Xử lý các trường hợp bắt buộc phải làm nhưng chưa có thời điểm đẹp.<br>
-                    - Hóa giải trùng tang liên táng.<br>
-                    - Kết hợp nhiều phương pháp để đưa ra thời điểm tối ưu.
-                </div>
-            `,
-            'cx': `
-                <h2>CẢM XẠ – ĐO NĂNG LƯỢNG<br><span style="font-size:16px; color:#fff;">& KIỂM TRA ÂM DƯƠNG</span></h2>
-                <div class="intro-text">"Cảm xạ là phương pháp kiểm tra năng lượng thực tế bằng gậy tầm long, con lắc và các công cụ hỗ trợ nhằm xác định đúng – sai một cách trực tiếp."</div>
-                
-                <h4><i class="fa-solid fa-magnifying-glass-chart"></i> Ứng dụng kiểm tra:</h4>
-                <ul>
-                    <li>Kiểm tra vị trí cửa, bếp, bàn thờ, cầu thang</li>
-                    <li>Đánh giá môi trường xung quanh: nước, kim loại, tâm linh</li>
-                    <li>Đối chiếu với phong thủy để xác định nguyên nhân</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-shield-halved"></i> Tiêu chí:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Kiểm chứng nhiều bước để đảm bảo độ chính xác.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ <b>Đặc biệt:</b><br>
-                    - Có thể kiểm tra lại bằng vật do gia chủ cung cấp.<br>
-                    - Hỗ trợ giao tiếp với phần âm theo phương pháp kiểm soát.<br>
-                    - Tránh nhiễu thông tin, tăng độ tin cậy khi xử lý.
-                </div>
-            `,
-            'dl': `
-                <h2>🔮 CÚNG – LẬP ĐÀN LỄ<br><span style="font-size:16px; color:#fff;">ÂM DƯƠNG 🔮</span></h2>
-                <div class="intro-text">"Cúng lễ là phương pháp cuối cùng nhằm cân bằng âm dương khi các yếu tố khác chưa đủ để giải quyết vấn đề."</div>
-                
-                <h4><i class="fa-solid fa-hands-praying"></i> Các nghi lễ thực hiện:</h4>
-                <ul>
-                    <li>Thực hiện các lễ: động thổ, nhập trạch, cầu an, cầu tài</li>
-                    <li>Cúng mộ phần, tạ mộ, xử lý âm phần</li>
-                    <li>Triệu linh, tiếp linh theo từng trường hợp</li>
-                </ul>
-
-                <h4><i class="fa-solid fa-scale-balanced"></i> Phương pháp:</h4>
-                <ul style="list-style: none;">
-                    <li style="color: #e2e8f0;">👉 Kết hợp giữa truyền thống và phương pháp kiểm chứng.</li>
-                </ul>
-
-                <div class="highlight-box">
-                    ✨ <b>Đặc biệt:</b><br>
-                    - Sử dụng đài âm dương và cảm xạ để kiểm tra liên tục.<br>
-                    - Quan sát 3 nén hương theo 24 cách cháy để nhận thông điệp.<br>
-                    - Có phương pháp riêng cho cúng bán đất, giải hạn tam tai – thái tuế.
-                </div>
-            `
+            'pt': `<h2>🔮 PHONG THỦY ỨNG DỤNG<br><span style="font-size:16px; color:#fff;">CẢI VẬN THỰC TẾ 🔮</span></h2><div class="intro-text">"Áp dụng đồng thời 5 phương pháp: Loan Đầu – Bát Trạch – Huyền Không Phi Tinh – Huyền Không Đại Quái – Liên Thành phái, giúp đưa ra giải pháp tối ưu và phù hợp nhất cho từng ngôi nhà."</div><div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Nhận tư vấn và xử lý toàn diện phong thủy Dương trạch (nhà ở) và Âm trạch (mộ phần): Nhà mới làm cho đẹp – nhà cũ chỉnh cho hợp.</div><h4><i class="fa-solid fa-house-chimney"></i> Dương trạch:</h4><ul><li>Bố trí cửa chính đón tài – lộc – quý nhân</li><li>Đặt bếp kích tài, tụ khí</li><li>Điều chỉnh nước đến – nước đi tránh hao tài</li><li>Sắp xếp giường ngủ ổn định sức khỏe</li></ul><h4><i class="fa-solid fa-yin-yang"></i> Âm trạch:</h4><ul><li>Đặt mộ theo phương pháp truyền thống kết hợp thực tế</li><li>Điều chỉnh hướng mộ để phát con cháu</li></ul><h4><i class="fa-solid fa-bullseye"></i> Quan điểm:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Hạn chế đập phá, tận dụng hiện trạng, điều chỉnh tinh tế để đạt hiệu quả cao.</li></ul><div class="highlight-box">✨ Nhận tư vấn từ đầu, quy hoạch nghĩa trang, thiết kế nhà thờ họ theo nguyên lý chuẩn.</div>`,
+            'tv': `<h2>TỬ VI – LUẬN GIẢI CUỘC ĐỜI<br><span style="font-size:16px; color:#fff;">& ĐỊNH HƯỚNG VẬN MỆNH</span></h2><div class="intro-text">"Kết hợp tinh hoa Nam Phái Tam Hợp và Tứ Hóa Tam Hợp phái, đồng thời thực hiện đối soát giờ sinh để đảm bảo độ chính xác cao nhất."</div><div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Từ đó đưa ra cái nhìn tổng thể về cuộc đời gia chủ trên nhiều phương diện: hoàn cảnh, môi trường, năng lực, sức khỏe và vận trình phát triển.</div><h4><i class="fa-solid fa-book-open"></i> Nội dung phân tích:</h4><ul><li>Hoàn cảnh sinh ra và cách ứng xử với thuận – nghịch cảnh</li><li>Môi trường sống, cơ hội và xung đột</li><li>Năng lực bản thân và nền tảng sức khỏe</li><li>Định hướng vận mệnh theo hướng chủ động</li></ul><h4><i class="fa-solid fa-lightbulb"></i> Quan điểm:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Không phụ thuộc số mệnh, mà điều hướng để tối ưu vận trình.</li><li style="color: #e2e8f0;">🔍 Kết hợp quẻ Kinh Dịch để kiểm chứng các mốc quan trọng.</li></ul><div class="highlight-box">✨ <b>Dịch vụ đặc biệt:</b> Tư vấn chọn thời điểm sinh con, đảm bảo hài hòa và tạo nền tảng tốt cho tương lai.</div>`,
+            'kd': `<h2>KINH DỊCH – LUẬN QUẺ<br><span style="font-size:16px; color:#fff;">DẪN ĐƯỜNG QUYẾT ĐỊNH</span></h2><div class="intro-text">"Kinh Dịch không chỉ dùng để dự đoán mà là công cụ giúp phân tích và đưa ra quyết định trong thực tế."</div><div style="text-align: center; margin-bottom: 15px; color: #cbd5e1; font-size: 14.5px;">Áp dụng song song Lục Hào và Mai Hoa giúp nhìn rõ bản chất sự việc và các hướng xử lý.</div><h4><i class="fa-solid fa-chart-line"></i> Nội dung luận giải:</h4><ul><li>Luận diễn biến: hiện tại – tương lai – kết quả</li><li>Nhận diện yếu tố bên trong – bên ngoài</li><li>Đánh giá năng lực bản thân khi xử lý việc</li><li>Lựa chọn trong 384 phương pháp và kiểm chứng ngay</li></ul><h4><i class="fa-solid fa-briefcase"></i> Ứng dụng:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Ứng dụng trong công việc, tài chính, quan hệ, doanh nghiệp.</li></ul><div class="highlight-box">✨ <b>Đặc biệt:</b><br>- Không chỉ xem mà đưa ra hướng xử lý cụ thể.<br>- Có thể kiểm tra trước kết quả của từng phương án.<br>- Giúp gia chủ chủ động và giảm thiểu rủi ro.</div>`,
+            'ls': `<h2>LỤC SỰ – CHỌN NGÀY GIỜ<br><span style="font-size:16px; color:#fff;">& DỤNG SỰ CHÍNH XÁC</span></h2><div class="intro-text">"Lục sự là phương pháp xác định thời điểm phù hợp để thực hiện công việc, giúp tăng thuận lợi và giảm rủi ro trong mọi việc lớn nhỏ."</div><h4><i class="fa-solid fa-calendar-check"></i> Nội dung dụng sự:</h4><ul><li>Chọn ngày cưới hỏi, động thổ, khai trương, xuất hành</li><li>Chọn ngày tang lễ, xây mộ, bốc mộ</li><li>Đánh giá vận hạn, tên tuổi, CCCD, số điện thoại</li><li>Đặt tên theo quy luật cổ truyền</li></ul><h4><i class="fa-solid fa-layer-group"></i> Ứng dụng:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Áp dụng linh hoạt cho cả dương sự và âm phần.</li></ul><div class="highlight-box">✨ <b>Đặc biệt:</b><br>- Xử lý các trường hợp bắt buộc phải làm nhưng chưa có thời điểm đẹp.<br>- Hóa giải trùng tang liên táng.<br>- Kết hợp nhiều phương pháp để đưa ra thời điểm tối ưu.</div>`,
+            'cx': `<h2>CẢM XẠ – ĐO NĂNG LƯỢNG<br><span style="font-size:16px; color:#fff;">& KIỂM TRA ÂM DƯƠNG</span></h2><div class="intro-text">"Cảm xạ là phương pháp kiểm tra năng lượng thực tế bằng gậy tầm long, con lắc và các công cụ hỗ trợ nhằm xác định đúng – sai một cách trực tiếp."</div><h4><i class="fa-solid fa-magnifying-glass-chart"></i> Ứng dụng kiểm tra:</h4><ul><li>Kiểm tra vị trí cửa, bếp, bàn thờ, cầu thang</li><li>Đánh giá môi trường xung quanh: nước, kim loại, tâm linh</li><li>Đối chiếu với phong thủy để xác định nguyên nhân</li></ul><h4><i class="fa-solid fa-shield-halved"></i> Tiêu chí:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Kiểm chứng nhiều bước để đảm bảo độ chính xác.</li></ul><div class="highlight-box">✨ <b>Đặc biệt:</b><br>- Có thể kiểm tra lại bằng vật do gia chủ cung cấp.<br>- Hỗ trợ giao tiếp với phần âm theo phương pháp kiểm soát.<br>- Tránh nhiễu thông tin, tăng độ tin cậy khi xử lý.</div>`,
+            'dl': `<h2>🔮 CÚNG – LẬP ĐÀN LỄ<br><span style="font-size:16px; color:#fff;">ÂM DƯƠNG 🔮</span></h2><div class="intro-text">"Cúng lễ là phương pháp cuối cùng nhằm cân bằng âm dương khi các yếu tố khác chưa đủ để giải quyết vấn đề."</div><h4><i class="fa-solid fa-hands-praying"></i> Các nghi lễ thực hiện:</h4><ul><li>Thực hiện các lễ: động thổ, nhập trạch, cầu an, cầu tài</li><li>Cúng mộ phần, tạ mộ, xử lý âm phần</li><li>Triệu linh, tiếp linh theo từng trường hợp</li></ul><h4><i class="fa-solid fa-scale-balanced"></i> Phương pháp:</h4><ul style="list-style: none;"><li style="color: #e2e8f0;">👉 Kết hợp giữa truyền thống và phương pháp kiểm chứng.</li></ul><div class="highlight-box">✨ <b>Đặc biệt:</b><br>- Sử dụng đài âm dương và cảm xạ để kiểm tra liên tục.<br>- Quan sát 3 nén hương theo 24 cách cháy để nhận thông điệp.<br>- Có phương pháp riêng cho cúng bán đất, giải hạn tam tai – thái tuế.</div>`
         };
+
         const infoPanel = document.getElementById('infoPanel');
         function showInfo(id) { document.getElementById('infoContent').innerHTML = Data[id]; infoPanel.classList.add('show'); }
         function closeInfo() { infoPanel.classList.remove('show'); }
@@ -452,7 +398,7 @@
 
         function switchMainTab(tabId, btnElement) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.nav-item, .btn-join').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             if(btnElement) btnElement.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -466,11 +412,60 @@
                 document.getElementById('adminSection').style.display = 'none';
             }
         }
+
+        // === LẤY TỈNH THÀNH ===
+        const API_URL = "https://provinces.open-api.vn/api";
+        window.fetchProvinces = async function() {
+            try {
+                const res = await fetch(API_URL + "/p/"); const data = await res.json();
+                let html = '<option value="">Chọn Tỉnh/Thành</option>';
+                data.forEach(p => { html += `<option value="${p.code}" data-name="${p.name}">${p.name}</option>`; });
+                const provinceSelect = document.getElementById('province');
+                if(provinceSelect) { provinceSelect.innerHTML = html; }
+            } catch (err) { console.error("Lỗi API Tỉnh:", err); }
+        };
+
+        window.fetchDistricts = async function(provinceCode) {
+            const distSel = document.getElementById('district'); const wardSel = document.getElementById('ward');
+            wardSel.innerHTML = '<option value="">Phường/Xã</option>'; wardSel.disabled = true;
+            if (!provinceCode) { distSel.innerHTML = '<option value="">Quận/Huyện</option>'; distSel.disabled = true; return; }
+            try {
+                const res = await fetch(`${API_URL}/p/${provinceCode}?depth=2`); const data = await res.json();
+                let html = '<option value="">Chọn Quận/Huyện</option>';
+                data.districts.forEach(d => { html += `<option value="${d.code}" data-name="${d.name}">${d.name}</option>`; });
+                distSel.innerHTML = html; distSel.disabled = false;
+            } catch (err) {}
+        }
+
+        window.fetchWards = async function(districtCode) {
+            const wardSel = document.getElementById('ward');
+            if (!districtCode) { wardSel.innerHTML = '<option value="">Phường/Xã</option>'; wardSel.disabled = true; return; }
+            try {
+                const res = await fetch(`${API_URL}/d/${districtCode}?depth=2`); const data = await res.json();
+                let html = '<option value="">Chọn Phường/Xã</option>';
+                data.wards.forEach(w => { html += `<option value="${w.code}" data-name="${w.name}">${w.name}</option>`; });
+                wardSel.innerHTML = html; wardSel.disabled = false;
+            } catch (err) {}
+        }
+        window.addEventListener('DOMContentLoaded', fetchProvinces);
+
+        // BỘ LỌC DANH BẠ ADMIN
+        window.currentFilter = 'all';
+        window.filterContacts = function(type, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active'); window.currentFilter = type; window.applyFilter();
+        }
+        window.applyFilter = function() {
+            document.querySelectorAll('#dynamicUserList .contact-item').forEach(li => {
+                const count = parseInt(li.getAttribute('data-unread') || '0');
+                if (window.currentFilter === 'unread' && count === 0) li.classList.add('hidden');
+                else li.classList.remove('hidden');
+            });
+        }
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        // BÀ CHÚ Ý: Đã import thêm remove để Thầy có thể XÓA bài viết
         import { getDatabase, ref, push, onChildAdded, get, child, set, onValue, update, off, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -490,23 +485,20 @@
         let currentUserName = "Khách";
         let userRole = null; 
         let activeChatRef = null;
+        window.openComments = {}; // Trạng thái mở/đóng khung bình luận
 
-        // === 1. LOGIC ĐĂNG NHẬP ===
+        // === 1. ĐĂNG NHẬP ===
         window.processLogin = async function() {
             const phone = document.getElementById('phoneInput').value.trim();
-            if (!phone.startsWith('0') || phone.length < 10) { alert("SĐT bắt đầu bằng số 0 nhé!"); return; }
-
+            if (!phone.startsWith('0') || phone.length < 10) { alert("Vui lòng nhập đúng SĐT bắt đầu bằng số 0 nhé!"); return; }
             const loginBtn = document.getElementById('loginBtn');
             const newUserInfo = document.getElementById('newUserInfo');
 
             if (phone === '0919935919') {
-                alert("Kính chào Thầy Xuân Trường!");
                 userRole = 'admin'; currentUserName = "Thầy Xuân Trường"; isUserLoggedIn = true;
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('adminSection').style.display = 'flex';
+                document.getElementById('loginSection').style.display = 'none'; document.getElementById('adminSection').style.display = 'flex';
                 const navBtn = document.getElementById('navJoinBtn');
-                navBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> TRANG CỦA THẦY';
-                navBtn.className = 'btn-admin-mode';
+                navBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> TRANG CỦA THẦY'; navBtn.className = 'btn-admin-mode';
                 initAdminLogic(); return;
             }
 
@@ -515,38 +507,40 @@
                 try {
                     const snapshot = await get(child(ref(db), `users/${phone}`));
                     if (snapshot.exists()) {
-                        currentUserName = snapshot.val().name;
-                        alert(`Chào mừng ${currentUserName} quay trở lại!`);
-                        isUserLoggedIn = true; triggerClientMode(phone);
-                    } else {
-                        newUserInfo.style.display = 'block'; loginBtn.innerText = "Hoàn Tất";
-                    }
+                        currentUserName = snapshot.val().name; isUserLoggedIn = true; triggerClientMode(phone);
+                    } else { newUserInfo.style.display = 'block'; loginBtn.innerText = "Hoàn Tất"; }
                 } catch(e) { alert("Lỗi kết nối!"); loginBtn.innerText = "Tiếp Tục"; }
             } else {
                 const name = document.getElementById('nameInput').value.trim();
-                const address = document.getElementById('addressInput').value.trim();
-                if (!name) { alert("Vui lòng cho biết Họ và Tên!"); return; }
+                const pSel = document.getElementById('province'); const dSel = document.getElementById('district'); const wSel = document.getElementById('ward');
+                const pName = pSel.options[pSel.selectedIndex]?.getAttribute('data-name') || "";
+                const dName = dSel.options[dSel.selectedIndex]?.getAttribute('data-name') || "";
+                const wName = wSel.options[wSel.selectedIndex]?.getAttribute('data-name') || "";
+                const address = [wName, dName, pName].filter(Boolean).join(", ");
+
+                if (!name || !address) { alert("Vui lòng điền đủ Họ Tên và Địa chỉ!"); return; }
 
                 loginBtn.innerText = "Đang lưu...";
                 await set(ref(db, `users/${phone}`), { 
                     name: name, address: address, year: document.getElementById('yearInput').value, 
                     dob: document.getElementById('dobInput').value, time: document.getElementById('timeInput').value, 
-                    gender: document.getElementById('genderInput').value
+                    gender: document.getElementById('genderInput').value, timestamp: Date.now(), unreadAdmin: 0, unreadClient: 0
                 });
-                currentUserName = name; isUserLoggedIn = true;
-                alert(`Chào mừng ${currentUserName} đã gia nhập!`);
-                triggerClientMode(phone);
+                currentUserName = name; isUserLoggedIn = true; triggerClientMode(phone);
             }
         }
 
         function triggerClientMode(phone) {
             userRole = 'guest'; currentUserPhone = phone;
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('clientSection').style.display = 'flex';
+            document.getElementById('loginSection').style.display = 'none'; document.getElementById('clientSection').style.display = 'flex';
             document.getElementById('btnClientPrivate').click();
+            onValue(ref(db, `users/${phone}/unreadClient`), (snap) => {
+                const count = snap.val() || 0; const badge = document.getElementById('clientUnreadBadge');
+                if (count > 0) { badge.innerText = count; badge.style.display = 'block'; } else { badge.style.display = 'none'; }
+            });
         }
 
-        // === 2. LOGIC TẢI BÀI VIẾT FORUM & MỚI CẬP NHẬT ===
+        // === 2. TẢI BÀI VIẾT (CÓ LIKE VÀ COMMENT) ===
         const postsRef = ref(db, 'posts');
         onValue(postsRef, (snapshot) => {
             const publicList = document.getElementById('publicForumList');
@@ -557,21 +551,53 @@
             if(homeList) homeList.innerHTML = '';
             if(approvalBox) approvalBox.innerHTML = '';
 
-            let hasApproved = false;
-            let hasPending = false;
+            let hasApproved = false; let hasPending = false; const posts = [];
 
             if (snapshot.exists()) {
-                const posts = [];
-                snapshot.forEach(childSnap => {
-                    posts.push({ id: childSnap.key, ...childSnap.val() });
-                });
+                snapshot.forEach(childSnap => { posts.push({ id: childSnap.key, ...childSnap.val() }); });
                 
-                // Đảo ngược mảng để bài mới nhất lên đầu
                 posts.reverse().forEach(data => {
                     const timeStr = new Date(data.timestamp).toLocaleString('vi-VN');
                     
                     if (data.status === 'approved') {
                         hasApproved = true;
+                        
+                        // XỬ LÝ LIKE
+                        let likesCount = data.likes ? Object.keys(data.likes).length : 0;
+                        let userKey = userRole === 'admin' ? "admin_truong" : currentUserPhone;
+                        let isLiked = userKey && data.likes && data.likes[userKey];
+                        let likeIcon = isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+                        let likeColor = isLiked ? 'var(--gold)' : 'var(--text-gray)';
+
+                        // XỬ LÝ COMMENT (GHIM THẦY LÊN TRƯỚC)
+                        let commentsHTML = '';
+                        if (data.comments) {
+                            let commentsArray = Object.entries(data.comments).map(([key, val]) => ({id: key, ...val}));
+                            commentsArray.sort((a, b) => {
+                                if (a.author === "Thầy Xuân Trường" && b.author !== "Thầy Xuân Trường") return -1;
+                                if (b.author === "Thầy Xuân Trường" && a.author !== "Thầy Xuân Trường") return 1;
+                                return a.timestamp - b.timestamp; 
+                            });
+                            
+                            commentsArray.forEach(c => {
+                                let isTeacherCmt = (c.author === "Thầy Xuân Trường");
+                                let tBadge = isTeacherCmt ? '<i class="fa-solid fa-crown" style="color: var(--gold); margin-right:5px;"></i>' : '';
+                                let cClass = isTeacherCmt ? 'comment-item teacher-comment' : 'comment-item';
+                                let tStr = new Date(c.timestamp).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'}) + ' - ' + new Date(c.timestamp).toLocaleDateString('vi-VN');
+                                
+                                commentsHTML += `
+                                    <div class="${cClass}">
+                                        <div class="comment-author">${tBadge}${c.author} <span style="font-size:10px; color:#64748b; font-weight:normal; margin-left: 5px;">${tStr}</span></div>
+                                        <div>${c.text}</div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            commentsHTML = '<div style="color: #64748b; font-size: 13px; font-style: italic; text-align: center;">Chưa có bình luận nào. Hãy là người đầu tiên!</div>';
+                        }
+                        
+                        let displayStyle = window.openComments && window.openComments[data.id] ? 'block' : 'none';
+
                         const postHTML = `
                             <div class="forum-post">
                                 <div class="forum-meta">
@@ -580,33 +606,31 @@
                                 </div>
                                 <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
                                 <div class="forum-content">${data.content}</div>
+                                
+                                <div class="forum-actions">
+                                    <button class="btn-action" style="color: ${likeColor}" onclick="toggleLike('${data.id}')">
+                                        <i class="${likeIcon}"></i> Thích (${likesCount})
+                                    </button>
+                                    <button class="btn-action" onclick="toggleComment('${data.id}')">
+                                        <i class="fa-regular fa-comment"></i> Bình luận
+                                    </button>
+                                </div>
+                                
+                                <div class="comment-section" id="comment-sec-${data.id}" style="display: ${displayStyle};">
+                                    <div class="comment-list" id="comment-list-${data.id}">${commentsHTML}</div>
+                                    <div class="comment-input-area">
+                                        <input type="text" id="input-cmt-${data.id}" placeholder="Viết bình luận..." onkeypress="if(event.key === 'Enter') submitComment('${data.id}')">
+                                        <button onclick="submitComment('${data.id}')"><i class="fa-solid fa-paper-plane"></i> Gửi</button>
+                                    </div>
+                                </div>
                             </div>
                         `;
                         if(publicList) publicList.innerHTML += postHTML;
-                        
-                        // Đẩy luôn ra Trang Chủ (Mới Cập Nhật)
-                        if(homeList) homeList.innerHTML += `
-                            <div class="news-item">
-                                <div class="news-date">${timeStr} - Đăng bởi: ${data.author}</div>
-                                <div class="news-title">${data.title}</div>
-                            </div>
-                        `;
+                        if(homeList) homeList.innerHTML += `<div class="news-item"><div class="news-date">${timeStr} - Đăng bởi: ${data.author}</div><div class="news-title">${data.title}</div></div>`;
+                    
                     } else if (data.status === 'pending') {
                         hasPending = true;
-                        if(approvalBox) approvalBox.innerHTML += `
-                            <div class="admin-post-card">
-                                <div class="forum-meta">
-                                    <span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span>
-                                    <span>${timeStr}</span>
-                                </div>
-                                <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
-                                <div class="forum-content">${data.content}</div>
-                                <div class="admin-post-actions">
-                                    <button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button>
-                                    <button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button>
-                                </div>
-                            </div>
-                        `;
+                        if(approvalBox) approvalBox.innerHTML += `<div class="admin-post-card"><div class="forum-meta"><span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span><span>${timeStr}</span></div><div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div><div class="forum-content">${data.content}</div><div class="admin-post-actions"><button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button><button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button></div></div>`;
                     }
                 });
             }
@@ -614,57 +638,116 @@
             if(!hasApproved && publicList) publicList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào được đăng.</div>';
             if(!hasApproved && homeList) homeList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào.</div>';
             if(!hasPending && approvalBox) approvalBox.innerHTML = '<div style="text-align:center; color:#10b981; margin-top:50px;"><i class="fa-solid fa-check-circle" style="font-size: 40px; margin-bottom:10px;"></i><br>Mọi thứ đã gọn gàng. Không có bài viết nào chờ duyệt!</div>';
+
+            const latestPost = posts.find(p => p.status === 'approved');
+            const mqPost = document.getElementById('mq-post');
+            if (latestPost && (Date.now() - latestPost.timestamp < 12 * 60 * 60 * 1000)) {
+                mqPost.innerHTML = `<i class="fa-solid fa-bullhorn"></i> <b>Tin nóng:</b> Thầy Xuân Trường vừa đăng bài: "${latestPost.title}"!`;
+                mqPost.style.display = 'inline';
+            } else { mqPost.style.display = 'none'; }
         });
 
-        // HÀM KHÁCH VIẾT BÀI
-        window.openPostModal = function() {
-            if (!isUserLoggedIn) {
-                alert("Vui lòng Bấm GIA NHẬP để Nhập Môn trước khi đăng bài nhé!");
-                return;
+        // MARQUEE KHÁCH MỚI
+        onValue(ref(db, 'users'), (snapshot) => {
+            if (snapshot.exists()) {
+                const users = []; snapshot.forEach(child => { users.push(child.val()); });
+                users.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                const latestUser = users[0]; const mqUser = document.getElementById('mq-user');
+                if (latestUser && latestUser.timestamp && (Date.now() - latestUser.timestamp < 5 * 60 * 1000)) {
+                    mqUser.innerHTML = `<i class="fa-solid fa-star"></i> Chào mừng khách hàng "${latestUser.name}" vừa gia nhập hệ thống.`;
+                    mqUser.style.display = 'inline';
+                } else { mqUser.style.display = 'none'; }
             }
+        });
+
+        // HÀM LIKE & COMMENT BÀI VIẾT
+        window.toggleLike = async function(postId) {
+            if (!isUserLoggedIn) { alert("Vui lòng ĐĂNG NHẬP để Thích bài viết!"); return; }
+            let userKey = userRole === 'admin' ? "admin_truong" : currentUserPhone;
+            const likeRef = ref(db, `posts/${postId}/likes/${userKey}`);
+            const snap = await get(likeRef);
+            if (snap.exists()) await remove(likeRef); else await set(likeRef, true);
+        }
+
+        window.toggleComment = function(postId) {
+            window.openComments[postId] = !window.openComments[postId];
+            const sec = document.getElementById(`comment-sec-${postId}`);
+            if (sec) sec.style.display = window.openComments[postId] ? 'block' : 'none';
+        }
+
+        window.submitComment = async function(postId) {
+            if (!isUserLoggedIn) { alert("Vui lòng ĐĂNG NHẬP để Bình luận!"); return; }
+            const input = document.getElementById(`input-cmt-${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = "Đang gửi..."; input.disabled = true;
+            await push(ref(db, `posts/${postId}/comments`), {
+                author: currentUserName, phone: currentUserPhone || "Thầy Xuân Trường",
+                text: text, timestamp: Date.now()
+            });
+            window.openComments[postId] = true;
+            setTimeout(() => { const list = document.getElementById('comment-list-' + postId); if(list) list.scrollTop = list.scrollHeight; }, 100);
+        }
+
+        // VIẾT BÀI / CÂU HỎI MỚI
+        window.openPostModal = function() {
+            if (!isUserLoggedIn) { alert("Vui lòng Bấm ĐĂNG NHẬP để Nhập Môn trước khi dùng tính năng này nhé!"); return; }
+            const isTeacher = (userRole === 'admin');
+            document.getElementById('modalTitle').innerText = isTeacher ? "Soạn Bài Viết Mới" : "Đặt Câu Hỏi Mới";
+            document.getElementById('titleLabel').innerText = isTeacher ? "Tiêu đề bài viết:" : "Tiêu đề câu hỏi:";
+            document.getElementById('contentLabel').innerText = isTeacher ? "Nội dung bài viết:" : "Chi tiết câu hỏi:";
+            document.getElementById('guestOptions').style.display = isTeacher ? 'none' : 'block';
+            document.getElementById('btnSubmitPost').innerText = isTeacher ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
             document.getElementById('postModal').classList.add('show');
         }
 
         window.submitPost = async function() {
-            const title = document.getElementById('postTitle').value.trim();
-            const cat = document.getElementById('postCategory').value;
-            const content = document.getElementById('postContent').value.trim();
-
+            const title = document.getElementById('postTitle').value.trim(); const cat = document.getElementById('postCategory').value; const content = document.getElementById('postContent').value.trim();
             if(!title || !content) { alert("Vui lòng điền đủ Tiêu đề và Nội dung!"); return; }
-
-            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang gửi...";
+            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý...";
             
-            // Đẩy bài lên kho 'posts' với trạng thái pending
-            await push(ref(db, 'posts'), {
-                title: title,
-                category: cat,
-                content: content,
-                author: currentUserName,
-                authorPhone: currentUserPhone || "Thầy Xuân Trường", // Nếu là Thầy đăng thì ghi tên
-                timestamp: Date.now(),
-                status: userRole === 'admin' ? 'approved' : 'pending' // Thầy đăng thì tự động duyệt luôn
-            });
-
-            alert("Đã gửi thành công! Bài viết đang chờ Thầy Xuân Trường duyệt để hiển thị.");
-            document.getElementById('postTitle').value = "";
-            document.getElementById('postContent').value = "";
-            document.getElementById('postModal').classList.remove('show');
-            btn.innerText = "Gửi Bài Chờ Thầy Duyệt";
-        }
-
-        // HÀM THẦY DUYỆT / XÓA BÀI
-        window.approvePost = function(postId) {
-            if(confirm("Xác nhận cho phép bài viết này xuất hiện trên trang chủ?")) {
-                update(ref(db, 'posts/' + postId), { status: 'approved' });
+            if (userRole === 'admin') {
+                await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: "0919935919", timestamp: Date.now(), status: 'approved' });
+                alert("Đã đăng bài viết thành công lên Diễn Đàn!");
+            } else {
+                const dest = document.querySelector('input[name="postDestination"]:checked').value;
+                if (dest === 'public') {
+                    await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: currentUserPhone, timestamp: Date.now(), status: 'pending' });
+                    alert("Đã gửi câu hỏi lên diễn đàn! Vui lòng chờ Thầy duyệt để hiển thị.");
+                } else if (dest === 'private') {
+                    const chatRef = ref(db, `messages/${currentUserPhone}`);
+                    const fullMessage = `[CÂU HỎI TỪ DIỄN ĐÀN - ${cat}]\nTiêu đề: ${title}\nNội dung:\n${content}`;
+                    await push(chatRef, { user: currentUserName, text: fullMessage, timestamp: Date.now() });
+                    
+                    const userRef = ref(db, `users/${currentUserPhone}`);
+                    const snap = await get(userRef);
+                    let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0;
+                    update(userRef, { unreadAdmin: count + 1 });
+                    
+                    alert("Đã chuyển câu hỏi vào Tin Nhắn Riêng với Thầy Xuân Trường!");
+                    
+                    document.getElementById('postTitle').value = ""; 
+                    document.getElementById('postContent').value = ""; 
+                    document.getElementById('postModal').classList.remove('show');
+                    btn.innerText = "Gửi Câu Hỏi Này"; 
+                    
+                    // 1. Nhảy sang Tab Diễn Đàn (Khu vực Chat)
+                    switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); 
+                    
+                    // 2. THÊM DÒNG NÀY: Ép hệ thống tự động click mở phòng chat 1-1 ra
+                    document.getElementById('btnClientPrivate').click();
+                    
+                    return; 
+                }
             }
-        }
-        window.deletePost = function(postId) {
-            if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN bài viết này không?")) {
-                remove(ref(db, 'posts/' + postId));
-            }
+            document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = "";
+            document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
         }
 
-        // === 3. LOGIC CHAT THẦY - KHÁCH (Giữ nguyên hoàn toàn) ===
+        window.approvePost = function(postId) { if(confirm("Xác nhận cho phép bài viết này xuất hiện trên trang chủ?")) { update(ref(db, 'posts/' + postId), { status: 'approved' }); } }
+        window.deletePost = function(postId) { if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN bài viết này không?")) { remove(ref(db, 'posts/' + postId)); } }
+
+        // === 3. LOGIC CHAT THẦY - KHÁCH ===
         function initAdminLogic() {
             onValue(ref(db, 'users'), (snapshot) => {
                 const div = document.getElementById('dynamicUserList'); div.innerHTML = ''; 
@@ -672,125 +755,92 @@
                     const users = snapshot.val();
                     for (const phone in users) {
                         const u = users[phone];
-                        const li = document.createElement('li'); li.className = 'contact-item';
+                        const unreadCount = u.unreadAdmin || 0;
+                        const li = document.createElement('li'); 
+                        li.className = 'contact-item';
+                        if (currentUserPhone === phone) li.classList.add('active-contact');
+                        li.setAttribute('data-unread', unreadCount);
                         li.onclick = function() { window.switchAdminContact('Phòng: '+u.name, this, 'private', phone, u); };
-                        li.innerHTML = `<div class="contact-icon"><i class="fa-regular fa-user"></i></div><div class="contact-info"><h5>${u.name}</h5><p>${phone}</p></div>`;
+                        let badgeHTML = unreadCount > 0 ? `<div class="unread-badge" style="display:block;">${unreadCount}</div>` : '';
+                        li.innerHTML = `<div class="contact-icon"><i class="fa-regular fa-user"></i></div><div class="contact-info"><h5>${u.name}</h5><p>${phone}</p></div>${badgeHTML}`;
                         div.appendChild(li);
                     }
+                    window.applyFilter(); 
                 }
             });
-            document.getElementById('btnAdminGlobal').click();
+            document.getElementById('btnAdminApproval').click();
         }
 
         window.switchAdminToApproval = function(el) {
             document.querySelectorAll('#adminSection .contact-item').forEach(li => li.classList.remove('active-contact'));
             el.classList.add('active-contact');
-            document.getElementById('adminChatTitle').innerText = "Kiểm Duyệt Bài Viết";
-            
-            // Ẩn Chat, Hiện Bảng Duyệt
-            document.getElementById('adminChatBox').style.display = 'none';
-            document.getElementById('adminInputArea').style.display = 'none';
-            document.getElementById('adminApprovalBox').style.display = 'flex';
-            
-            // Khóa cột thông tin
-            const infoSidebar = document.getElementById('infoSidebar');
-            infoSidebar.style.opacity = '0.3'; infoSidebar.style.pointerEvents = 'none';
+            document.getElementById('adminChatTitle').innerText = "Kiểm Duyệt Bài Viết"; document.getElementById('adminChatBox').style.display = 'none';
+            document.getElementById('adminInputArea').style.display = 'none'; document.getElementById('adminApprovalBox').style.display = 'flex';
+            document.getElementById('infoSidebar').style.opacity = '0.3'; document.getElementById('infoSidebar').style.pointerEvents = 'none';
+            currentUserPhone = null;
         }
 
         window.switchAdminContact = function(title, el, type, phone, userData) {
             document.querySelectorAll('#adminSection .contact-item').forEach(li => li.classList.remove('active-contact'));
             el.classList.add('active-contact');
-            document.getElementById('adminChatTitle').innerText = title;
-            
-            // Bật Chat, Ẩn Bảng Duyệt
-            document.getElementById('adminChatBox').style.display = 'flex';
-            document.getElementById('adminInputArea').style.display = 'flex';
-            document.getElementById('adminApprovalBox').style.display = 'none';
+            document.getElementById('adminChatTitle').innerText = title; document.getElementById('adminChatBox').style.display = 'flex';
+            document.getElementById('adminInputArea').style.display = 'flex'; document.getElementById('adminApprovalBox').style.display = 'none';
             document.getElementById('adminChatBox').innerHTML = '';
-            
             if (activeChatRef) off(activeChatRef); 
-
-            const infoSidebar = document.getElementById('infoSidebar');
-            if (type === 'global') {
-                currentUserPhone = null; infoSidebar.style.opacity = '0.3'; infoSidebar.style.pointerEvents = 'none';
-                document.getElementById('customerDetails').innerHTML = "Kênh đàm đạo cộng đồng.";
-                document.getElementById('adminNotes').value = "";
-                activeChatRef = ref(db, 'global_messages');
-            } else {
-                currentUserPhone = phone; infoSidebar.style.opacity = '1'; infoSidebar.style.pointerEvents = 'auto';
-                document.getElementById('customerDetails').innerHTML = `<p>Tên: <span>${userData.name}</span></p><p>Nơi ở: <span>${userData.address||'-'}</span></p><p>Năm: <span>${userData.year||'-'}</span></p><p>Giờ/Ngày: <span>${userData.time||'-'} | ${userData.dob||'-'}</span></p>`;
-                document.getElementById('adminNotes').value = userData.notes || '';
-                activeChatRef = ref(db, `messages/${phone}`);
-            }
-            onChildAdded(activeChatRef, (data) => { renderMsg(data.val(), 'adminChatBox', true); });
+            currentUserPhone = phone; 
+            document.getElementById('infoSidebar').style.opacity = '1'; document.getElementById('infoSidebar').style.pointerEvents = 'auto';
+            document.getElementById('customerDetails').innerHTML = `<p>Tên: <span>${userData.name}</span></p><p>Nơi ở: <span>${userData.address||'-'}</span></p><p>Năm: <span>${userData.year||'-'}</span></p><p>Giờ/Ngày: <span>${userData.time||'-'} | ${userData.dob||'-'}</span></p>`;
+            document.getElementById('adminNotes').value = userData.notes || '';
+            update(ref(db, `users/${phone}`), { unreadAdmin: 0 });
+            activeChatRef = ref(db, `messages/${phone}`);
+            onChildAdded(activeChatRef, (data) => { renderMsg(data.val(), 'adminChatBox', true); if (userRole === 'admin' && currentUserPhone === phone) { update(ref(db, `users/${phone}`), { unreadAdmin: 0 }); } });
         }
 
-        window.sendAdminMessage = function() {
+        window.sendAdminMessage = async function() {
             const input = document.getElementById('adminMsgInput');
-            if (input.value.trim() && activeChatRef) { push(activeChatRef, { user: "Thầy Xuân Trường", text: input.value, timestamp: Date.now() }); input.value = ""; }
+            if (input.value.trim() && activeChatRef && currentUserPhone) { 
+                push(activeChatRef, { user: "Thầy Xuân Trường", text: input.value, timestamp: Date.now() }); 
+                input.value = ""; 
+                const userRef = ref(db, `users/${currentUserPhone}`); const snap = await get(userRef);
+                let count = snap.exists() ? (snap.val().unreadClient || 0) : 0; update(userRef, { unreadClient: count + 1 });
+            }
         }
         window.handleAdminKeyPress = function(e) { if(e.key === 'Enter') window.sendAdminMessage(); }
-
-        window.saveNotes = async function() {
-            if (!currentUserPhone) return;
-            const text = document.getElementById('adminNotes').value;
-            const btn = document.getElementById('saveNotesBtn'); btn.innerText = "Đang lưu...";
-            await update(ref(db, `users/${currentUserPhone}`), { notes: text });
-            btn.innerText = "Đã Lưu Xong!"; setTimeout(() => { btn.innerText = "Lưu Ghi Chú"; }, 2000);
-        }
-
+        window.saveNotes = async function() { if (!currentUserPhone) return; const text = document.getElementById('adminNotes').value; const btn = document.getElementById('saveNotesBtn'); btn.innerText = "Đang lưu..."; await update(ref(db, `users/${currentUserPhone}`), { notes: text }); btn.innerText = "Đã Lưu Xong!"; setTimeout(() => { btn.innerText = "Lưu Ghi Chú"; }, 2000); }
         window.switchClientContact = function(title, el, type) {
             document.querySelectorAll('#clientSection .contact-item').forEach(li => li.classList.remove('active-contact'));
-            el.classList.add('active-contact');
-            document.getElementById('clientChatTitle').innerText = title;
-            document.getElementById('clientChatBox').innerHTML = '';
+            el.classList.add('active-contact'); document.getElementById('clientChatTitle').innerText = title; document.getElementById('clientChatBox').innerHTML = '';
             if (activeChatRef) off(activeChatRef); 
-
-            activeChatRef = ref(db, type === 'global' ? 'global_messages' : `messages/${currentUserPhone}`);
-            onChildAdded(activeChatRef, (data) => { renderMsg(data.val(), 'clientChatBox', false); });
+            update(ref(db, `users/${currentUserPhone}`), { unreadClient: 0 });
+            activeChatRef = ref(db, `messages/${currentUserPhone}`);
+            onChildAdded(activeChatRef, (data) => { renderMsg(data.val(), 'clientChatBox', false); if (userRole === 'guest') { update(ref(db, `users/${currentUserPhone}`), { unreadClient: 0 }); } });
         }
 
-        window.sendClientMessage = function() {
+        window.sendClientMessage = async function() {
             const input = document.getElementById('clientMsgInput');
-            if (input.value.trim() && activeChatRef) { push(activeChatRef, { user: currentUserName, text: input.value, timestamp: Date.now() }); input.value = ""; }
+            if (input.value.trim() && activeChatRef) { 
+                push(activeChatRef, { user: currentUserName, text: input.value, timestamp: Date.now() }); 
+                input.value = ""; 
+                const userRef = ref(db, `users/${currentUserPhone}`); const snap = await get(userRef);
+                let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0; update(userRef, { unreadAdmin: count + 1 });
+            }
         }
         window.handleClientKeyPress = function(e) { if(e.key === 'Enter') window.sendClientMessage(); }
 
         function renderMsg(msg, boxId, isAdminView) {
-            const chatBox = document.getElementById(boxId);
-            if(!chatBox) return;
-
-            const msgEl = document.createElement('div');
-            msgEl.style.display = "flex"; msgEl.style.flexDirection = "column";
-
-            const isTeacher = msg.user === "Thầy Xuân Trường";
-            const isMe = isAdminView ? isTeacher : (msg.user === currentUserName);
-
-            if(isMe) { 
-                msgEl.style.alignSelf = "flex-end";
-                msgEl.style.background = isTeacher ? "rgba(212, 175, 55, 0.2)" : "rgba(255,255,255,0.1)";
-                msgEl.style.border = isTeacher ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.2)";
-                msgEl.style.borderRadius = "15px 15px 0px 15px";
-                if(isTeacher) msgEl.style.boxShadow = "0 0 10px rgba(212, 175, 55, 0.3)";
-            } else { 
-                msgEl.style.alignSelf = "flex-start";
-                msgEl.style.background = isTeacher ? "rgba(212, 175, 55, 0.15)" : "rgba(255,255,255,0.05)";
-                msgEl.style.border = isTeacher ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.1)";
-                msgEl.style.borderRadius = "15px 15px 15px 0px";
-                if(isTeacher) msgEl.style.boxShadow = "0 0 15px rgba(212, 175, 55, 0.4)";
+            const chatBox = document.getElementById(boxId); if(!chatBox) return;
+            const msgEl = document.createElement('div'); msgEl.style.display = "flex"; msgEl.style.flexDirection = "column";
+            const isTeacher = msg.user === "Thầy Xuân Trường"; const isMe = isAdminView ? isTeacher : (msg.user === currentUserName);
+            if(isMe) {
+                msgEl.style.alignSelf = "flex-end"; msgEl.style.background = isTeacher ? "rgba(212, 175, 55, 0.2)" : "rgba(255,255,255,0.1)"; msgEl.style.border = isTeacher ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.2)"; msgEl.style.borderRadius = "15px 15px 0px 15px"; if(isTeacher) msgEl.style.boxShadow = "0 0 10px rgba(212, 175, 55, 0.3)";
+            } else {
+                msgEl.style.alignSelf = "flex-start"; msgEl.style.background = isTeacher ? "rgba(212, 175, 55, 0.15)" : "rgba(255,255,255,0.05)"; msgEl.style.border = isTeacher ? "1px solid var(--gold)" : "1px solid rgba(255,255,255,0.1)"; msgEl.style.borderRadius = "15px 15px 15px 0px"; if(isTeacher) msgEl.style.boxShadow = "0 0 15px rgba(212, 175, 55, 0.4)";
             }
-
             msgEl.style.padding = "10px 15px"; msgEl.style.width = "fit-content"; msgEl.style.maxWidth = "75%"; msgEl.style.margin = "8px 0";
             const timeString = new Date(msg.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
             const teacherIcon = isTeacher ? '<i class="fa-solid fa-crown" style="margin-right: 5px;"></i>' : '';
-
-            msgEl.innerHTML = `
-                <div style="margin-bottom: 3px;"><strong style="color: ${isTeacher ? 'var(--gold)' : '#fff'}; font-size: 13px; text-transform: uppercase;">${teacherIcon}${msg.user}</strong></div>
-                <div style="color: #e2e8f0; font-size: 15px; word-wrap: break-word;">${msg.text}</div>
-                <div style="font-size: 10px; color: #64748b; align-self: flex-end; margin-top: 5px;">${timeString}</div>
-            `;
-            chatBox.appendChild(msgEl);
-            setTimeout(() => { chatBox.scrollTop = chatBox.scrollHeight; }, 50);
+            msgEl.innerHTML = `<div style="margin-bottom: 3px;"><strong style="color: ${isTeacher ? 'var(--gold)' : '#fff'}; font-size: 13px; text-transform: uppercase;">${teacherIcon}${msg.user}</strong></div><div style="color: #e2e8f0; font-size: 15px; word-wrap: break-word;">${msg.text}</div><div style="font-size: 10px; color: #64748b; align-self: flex-end; margin-top: 5px;">${timeString}</div>`;
+            chatBox.appendChild(msgEl); setTimeout(() => { chatBox.scrollTop = chatBox.scrollHeight; }, 50);
         }
     </script>
 </body>
