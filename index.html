@@ -93,7 +93,7 @@
         .forum-content { font-size: 14.5px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;}
 
         /* --- THANH CÔNG CỤ SOẠN THẢO (RICH TEXT EDITOR) --- */
-        .editor-toolbar { display: flex; gap: 8px; background: rgba(0,0,0,0.8); padding: 10px; border: 1px solid rgba(212,175,55,0.4); border-bottom: none; border-radius: 8px 8px 0 0; flex-wrap: wrap; }
+        .editor-toolbar { display: flex; gap: 8px; background: rgba(0,0,0,0.8); padding: 10px; border: 1px solid rgba(212,175,55,0.4); border-bottom: none; border-radius: 8px 8px 0 0; flex-wrap: wrap; align-items: center;}
         .editor-toolbar button { background: rgba(255,255,255,0.1); border: none; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; font-size: 14px;}
         .editor-toolbar button:hover { background: var(--gold); color: #000; }
         .color-picker-wrap { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px; color: white; border: 1px solid rgba(212,175,55,0.2);}
@@ -183,7 +183,7 @@
 
         footer { text-align: center; padding: 30px 20px; color: var(--text-gray); font-size: 13px; border-top: 1px dashed rgba(212,175,55,0.3); margin-top: auto; letter-spacing: 2px; text-transform: uppercase;}
 
-        /* --- ÉP GIAO DIỆN MOBILE TỐI ƯU --- */
+        /* --- ÉP GIAO DIỆN MOBILE TỐI ƯU CỰC HẠN --- */
         @media (max-width: 768px) {
             .top-nav { flex-direction: column; height: auto; padding: 10px 5px; gap: 8px; align-items: center; }
             .logo-area { width: 100%; justify-content: center; text-align: center; }
@@ -361,6 +361,8 @@
                         <i class="fa-solid fa-highlighter"></i> Đánh dấu
                         <input type="color" value="#d4af37" onchange="formatText('hiliteColor', this.value)" title="Màu nền (Highlight)">
                     </div>
+                    <button type="button" onclick="document.getElementById('postImageUpload').click()" title="Chèn ảnh vào bài viết" style="margin-left: auto; border: 1px solid var(--gold);"><i class="fa-solid fa-image"></i> Tải ảnh lên</button>
+                    <input type="file" id="postImageUpload" accept="image/*" style="display: none;" onchange="uploadImageToImgbb(this, 'post')">
                 </div>
                 
                 <div id="postContent" contenteditable="true" class="rich-editor" data-placeholder="Viết nội dung vào đây..."></div>
@@ -412,7 +414,11 @@
             <div class="chat-main">
                 <div class="chat-main-header" id="clientChatTitle">Tư vấn với Thầy</div>
                 <div id="clientChatBox" class="chat-box"></div>
+                
                 <div class="chat-input-area">
+                    <button style="background: transparent; border: none; color: var(--gold); font-size: 20px; cursor: pointer; transition: 0.3s;" onclick="document.getElementById('clientImageUpload').click()"><i class="fa-solid fa-image"></i></button>
+                    <input type="file" id="clientImageUpload" accept="image/*" style="display: none;" onchange="uploadImageToImgbb(this, 'chat', 'client')">
+                    
                     <input type="text" id="clientMsgInput" class="chat-input" placeholder="Nhập tin nhắn..." onkeypress="handleClientKeyPress(event)">
                     <button class="send-btn" id="clientSendBtn" onclick="sendClientMessage()">Gửi</button>
                 </div>
@@ -439,7 +445,11 @@
             <div class="chat-main">
                 <div class="chat-main-header" id="adminChatTitle"></div>
                 <div id="adminChatBox" class="chat-box"></div>
+                
                 <div class="chat-input-area" id="adminInputArea">
+                    <button style="background: transparent; border: none; color: var(--gold); font-size: 20px; cursor: pointer; transition: 0.3s;" onclick="document.getElementById('adminImageUpload').click()"><i class="fa-solid fa-image"></i></button>
+                    <input type="file" id="adminImageUpload" accept="image/*" style="display: none;" onchange="uploadImageToImgbb(this, 'chat', 'admin')">
+                    
                     <input type="text" id="adminMsgInput" class="chat-input" placeholder="Nhập tin nhắn tư vấn..." onkeypress="handleAdminKeyPress(event)">
                     <button class="send-btn" id="adminSendBtn" onclick="sendAdminMessage()">Gửi</button>
                 </div>
@@ -500,7 +510,7 @@
             }
         }
 
-        // === HÀM FORMAT CHỮ CHO BẢNG SOẠN THẢO ===
+        // === HÀM FORMAT CHỮ ===
         window.formatText = function(command, value = null) {
             document.execCommand(command, false, value);
             document.getElementById('postContent').focus();
@@ -678,6 +688,82 @@
             });
         }
 
+        // === HÀM XỬ LÝ UP ẢNH LÊN IMGBB TỪ JAVASCRIPT ===
+        // Gắn vào window để gọi từ thẻ HTML
+        window.uploadImageToImgbb = async function(inputElement, target, chatType = '') {
+            const file = inputElement.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('ImgBB chỉ hỗ trợ tải lên hình ảnh (JPG, PNG, GIF...). Vui lòng chọn file ảnh!');
+                inputElement.value = '';
+                return;
+            }
+
+            const apiKey = '58d7794c7f289440a86085be04801f5f'; // Mã API của bà đây nè
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                let loadingMsg = "Đang tải ảnh...";
+                let originalPlaceholder = "";
+                let textInput = null;
+
+                if (target === 'chat') {
+                    textInput = document.getElementById(chatType + 'MsgInput');
+                    originalPlaceholder = textInput.placeholder;
+                    textInput.placeholder = loadingMsg;
+                    textInput.disabled = true;
+                } else {
+                    document.getElementById('postContent').innerHTML += `<div id="tempLoadingImg" style="color:var(--text-gray); font-style:italic;"><i class="fa-solid fa-spinner fa-spin"></i> Đang tải ảnh lên...</div>`;
+                }
+
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    const imageUrl = data.data.url;
+                    
+                    if (target === 'post') {
+                        // Xóa chữ "đang tải" và chèn thẻ ảnh vào Editor
+                        let content = document.getElementById('postContent').innerHTML;
+                        content = content.replace(/<div id="tempLoadingImg".*?<\/div>/, '');
+                        document.getElementById('postContent').innerHTML = content + `<div style="margin-top:10px;"><img src="${imageUrl}" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--gold);"></div><br>`;
+                    } else if (target === 'chat') {
+                        // Gửi thẳng vô khung chat
+                        const imgHtml = `<a href="${imageUrl}" target="_blank"><img src="${imageUrl}" style="max-width: 250px; border-radius: 8px; margin-top: 5px; border: 1px solid var(--gold);"></a>`;
+                        if (chatType === 'client') {
+                            await push(activeChatRef, { user: currentUserName, text: imgHtml, timestamp: Date.now() });
+                            const userRef = ref(db, `users/${currentUserPhone}`); const snap = await get(userRef);
+                            let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0; update(userRef, { unreadAdmin: count + 1 });
+                        } else if (chatType === 'admin') {
+                            await push(activeChatRef, { user: "Thầy Xuân Trường", text: imgHtml, timestamp: Date.now() });
+                            const userRef = ref(db, `users/${currentUserPhone}`); const snap = await get(userRef);
+                            let count = snap.exists() ? (snap.val().unreadClient || 0) : 0; update(userRef, { unreadClient: count + 1 });
+                        }
+                    }
+                } else {
+                    alert("Lỗi khi tải ảnh lên: " + data.error.message);
+                    if (target === 'post') {
+                        let content = document.getElementById('postContent').innerHTML;
+                        document.getElementById('postContent').innerHTML = content.replace(/<div id="tempLoadingImg".*?<\/div>/, '');
+                    }
+                }
+            } catch (error) {
+                alert("Đã xảy ra lỗi kết nối khi tải ảnh.");
+            } finally {
+                inputElement.value = '';
+                if (target === 'chat' && textInput) {
+                    textInput.placeholder = originalPlaceholder;
+                    textInput.disabled = false;
+                    textInput.focus();
+                }
+            }
+        };
+
         const postsRef = ref(db, 'posts');
         onValue(postsRef, (snapshot) => {
             const publicList = document.getElementById('publicForumList');
@@ -731,7 +817,7 @@
                             <div class="forum-post" id="post-${data.id}">
                                 <div class="forum-meta"><span><i class="fa-solid fa-user-pen"></i> ${data.author}</span><span><i class="fa-regular fa-clock"></i> ${timeStr}</span></div>
                                 <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
-                                <div class="forum-content">${data.content}</div>
+                                <div class="forum-content" style="white-space: pre-wrap;">${data.content}</div>
                                 <div class="forum-actions">
                                     <button class="btn-action" style="color: ${likeColor}" onclick="toggleLike('${data.id}')"><i class="${likeIcon}"></i> Thích (${likesCount})</button>
                                     <button class="btn-action" onclick="toggleComment('${data.id}')"><i class="fa-regular fa-comment"></i> Bình luận</button>
@@ -749,20 +835,13 @@
                     
                     } else if (data.status === 'pending') {
                         hasPending = true;
-                        if(approvalBox) approvalBox.innerHTML += `<div class="admin-post-card"><div class="forum-meta"><span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span><span>${timeStr}</span></div><div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div><div class="forum-content">${data.content}</div><div class="admin-post-actions"><button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button><button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button></div></div>`;
+                        if(approvalBox) approvalBox.innerHTML += `<div class="admin-post-card"><div class="forum-meta"><span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span><span>${timeStr}</span></div><div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div><div class="forum-content" style="white-space: pre-wrap;">${data.content}</div><div class="admin-post-actions"><button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button><button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button></div></div>`;
                     }
                 });
             }
 
             if(!hasApproved && publicList) publicList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào được đăng.</div>';
             if(!hasPending && approvalBox) approvalBox.innerHTML = '<div style="text-align:center; color:#10b981; margin-top:50px;"><i class="fa-solid fa-check-circle" style="font-size: 40px; margin-bottom:10px;"></i><br>Mọi thứ đã gọn gàng. Không có bài viết nào chờ duyệt!</div>';
-
-            const latestPost = posts.find(p => p.status === 'approved');
-            const mqPost = document.getElementById('mq-post');
-            if (latestPost && (Date.now() - latestPost.timestamp < 12 * 60 * 60 * 1000)) {
-                mqPost.innerHTML = `<i class="fa-solid fa-bullhorn"></i> <b>Tin nóng:</b> Thầy Xuân Trường vừa đăng bài: "${latestPost.title}"!`;
-                mqPost.style.display = 'inline';
-            } else { mqPost.style.display = 'none'; }
         });
 
         onValue(ref(db, 'users'), (snapshot) => {
@@ -807,14 +886,13 @@
             document.getElementById('guestOptions').style.display = isTeacher ? 'none' : 'block';
             document.getElementById('btnSubmitPost').innerText = isTeacher ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
             document.getElementById('postModal').classList.add('show');
-            document.getElementById('postContent').innerHTML = ""; // Xóa trắng khi mở
+            document.getElementById('postContent').innerHTML = ""; 
         }
 
         window.submitPost = async function() {
             const title = document.getElementById('postTitle').value.trim(); 
             const cat = document.getElementById('postCategory').value; 
             
-            // Đã đổi sang lấy mã HTML từ bảng soạn thảo xịn xò
             let content = document.getElementById('postContent').innerHTML.trim();
             if(content === '<br>' || content === '') content = '';
 
