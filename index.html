@@ -84,6 +84,13 @@
         .h-meta { font-size: 11px; color: var(--text-gray); }
 
         /* DANH SÁCH BÀI VIẾT FORUM */
+        .news-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .news-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .news-date { font-size: 12px; color: var(--text-gray); margin-bottom: 5px; }
+        .news-title { font-size: 16px; color: #fff; font-weight: bold; }
+        .news-item:hover { background: rgba(255,255,255,0.05); border-radius: 8px; padding-left: 10px; }
+        .news-item:hover .news-title { color: var(--gold); }
+
         .forum-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .forum-post { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;}
         .forum-post:hover { background: rgba(255,255,255,0.08); }
@@ -147,10 +154,13 @@
         .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: #1e293b; display: flex; justify-content: center; align-items: center; color: var(--gold); font-size: 16px; }
         .contact-info h5 { margin: 0; font-size: 14px; color: #fff; }
         .contact-info p { margin: 2px 0 0; font-size: 11px; color: #94a3b8; }
+        
         .unread-badge { background: #ef4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
+        
         .filter-group { display: flex; gap: 5px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .filter-btn { flex: 1; padding: 5px; background: rgba(255,255,255,0.05); color: var(--text-gray); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; cursor: pointer; font-size: 12px; transition: 0.3s; }
         .filter-btn.active { background: rgba(212,175,55,0.2); color: var(--gold); border-color: var(--gold); font-weight: bold;}
+
         .chat-main { flex: 1; display: flex; flex-direction: column; }
         .chat-main-header { padding: 15px; border-bottom: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.3); color: var(--gold); font-weight: bold; text-align: center;}
         .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
@@ -265,6 +275,11 @@
         
         <div id="homeDefaultMessage" style="text-align:center; color: var(--text-gray); margin-top: 30px; font-style: italic;">
             Vui lòng chọn một chuyên mục ở trên để xem các bài viết và câu hỏi mới nhất.
+        </div>
+
+        <div class="section-header" style="margin-top: 60px;"><h2>TIN TỨC CHUNG</h2></div>
+        <div class="news-list" id="homeLatestPosts">
+            <div style="text-align:center; color:#94a3b8;">Đang tải tin tức...</div>
         </div>
     </div>
 
@@ -453,7 +468,7 @@
         function closeInfo() { infoPanel.classList.remove('show'); }
 
         let isUserLoggedIn = false; 
-        window.allApprovedPosts = []; // Mảng chứa toàn bộ bài viết đã duyệt
+        window.allApprovedPosts = []; 
         window.currentHomeCategory = null;
 
         function switchMainTab(tabId, btnElement) {
@@ -471,6 +486,33 @@
                 document.getElementById('clientSection').style.display = 'none';
                 document.getElementById('adminSection').style.display = 'none';
             }
+        }
+
+        // === HÀM XEM BÀI CHI TIẾT ===
+        window.viewPost = function(postId) {
+            // Chuyển sang Tab Bài Viết/Diễn đàn
+            switchMainTab('tab-forum', document.querySelectorAll('.nav-links a')[2]);
+            
+            // Đợi 1 chút cho tab load ra giao diện, rồi cuộn xuống
+            setTimeout(() => {
+                const targetPost = document.getElementById('post-' + postId);
+                if (targetPost) {
+                    targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Tạo hiệu ứng phát sáng
+                    targetPost.style.transition = "all 0.5s ease";
+                    targetPost.style.boxShadow = "0 0 40px var(--gold)";
+                    targetPost.style.transform = "scale(1.02)";
+                    targetPost.style.borderLeft = "8px solid var(--gold)";
+                    
+                    // Tắt hiệu ứng sau 2 giây
+                    setTimeout(() => {
+                        targetPost.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+                        targetPost.style.transform = "scale(1)";
+                        targetPost.style.borderLeft = "4px solid var(--gold)";
+                    }, 2000);
+                }
+            }, 400); 
         }
 
         const API_URL = "https://provinces.open-api.vn/api";
@@ -508,7 +550,6 @@
         }
         window.addEventListener('DOMContentLoaded', fetchProvinces);
 
-        // BỘ LỌC DANH BẠ ADMIN
         window.currentFilter = 'all';
         window.filterContacts = function(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -522,11 +563,9 @@
             });
         }
         
-        // BỘ LỌC TRANG CHỦ THEO CHUYÊN MỤC
         window.filterHome = function(category) {
             window.currentHomeCategory = category;
             
-            // Đổi hiệu ứng nút bấm đang chọn
             document.querySelectorAll('.home-hex-grid .hex-btn').forEach(btn => btn.classList.remove('active-cat'));
             const safeId = "hbtn-" + category.replace(/ /g, '-');
             const activeBtn = document.getElementById(safeId);
@@ -536,16 +575,15 @@
             document.getElementById('homeFilteredResult').style.display = 'block';
             document.getElementById('homeFilterTitle').innerText = "CHUYÊN MỤC: " + category.toUpperCase();
 
-            // Tách làm 2 mảng: Của Thầy và Của Khách, Lấy Top 5
             const catPosts = window.allApprovedPosts.filter(p => p.category === category);
             const teacherPosts = catPosts.filter(p => p.author === 'Thầy Xuân Trường').slice(0, 5);
             const userQuestions = catPosts.filter(p => p.author !== 'Thầy Xuân Trường').slice(0, 5);
 
-            // Cấu trúc HTML
+            // Cập nhật hàm gọi khi click
             const renderMiniList = (list) => {
                 if(list.length === 0) return '<div style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; font-style:italic;">Hiện chưa có nội dung nào.</div>';
                 return list.map(p => `
-                    <div class="home-post-item" onclick="switchMainTab('tab-forum', document.querySelectorAll('.nav-links a')[2])">
+                    <div class="home-post-item" onclick="viewPost('${p.id}')">
                         <div class="h-title"><i class="fa-solid fa-angle-right" style="color: var(--gold); font-size: 10px; margin-right: 5px;"></i> ${p.title}</div>
                         <div class="h-meta"><i class="fa-solid fa-pen-nib"></i> ${p.author} &nbsp;|&nbsp; <i class="fa-regular fa-clock"></i> ${new Date(p.timestamp).toLocaleDateString('vi-VN')}</div>
                     </div>
@@ -580,7 +618,6 @@
         let activeChatRef = null;
         window.openComments = {}; 
         
-        // === 1. ĐĂNG NHẬP ===
         window.processLogin = async function() {
             const phone = document.getElementById('phoneInput').value.trim();
             if (!phone.startsWith('0') || phone.length < 10) { alert("Vui lòng nhập đúng SĐT bắt đầu bằng số 0 nhé!"); return; }
@@ -633,13 +670,14 @@
             });
         }
 
-        // === 2. TẢI BÀI VIẾT VÀ FORUM ===
         const postsRef = ref(db, 'posts');
         onValue(postsRef, (snapshot) => {
             const publicList = document.getElementById('publicForumList');
+            const homeList = document.getElementById('homeLatestPosts');
             const approvalBox = document.getElementById('adminApprovalBox');
             
             if(publicList) publicList.innerHTML = '';
+            if(homeList) homeList.innerHTML = '';
             if(approvalBox) approvalBox.innerHTML = '';
 
             let hasApproved = false; let hasPending = false; const posts = [];
@@ -647,7 +685,6 @@
             if (snapshot.exists()) {
                 snapshot.forEach(childSnap => { posts.push({ id: childSnap.key, ...childSnap.val() }); });
                 
-                // Lưu mảng bài viết Approved vào biến toàn cục, sắp xếp mới nhất lên đầu để Trang chủ xài
                 window.allApprovedPosts = posts.filter(p => p.status === 'approved').sort((a,b) => b.timestamp - a.timestamp);
                 if (window.currentHomeCategory) { window.filterHome(window.currentHomeCategory); }
 
@@ -685,7 +722,7 @@
                         let displayStyle = window.openComments && window.openComments[data.id] ? 'block' : 'none';
 
                         const postHTML = `
-                            <div class="forum-post">
+                            <div class="forum-post" id="post-${data.id}">
                                 <div class="forum-meta"><span><i class="fa-solid fa-user-pen"></i> ${data.author}</span><span><i class="fa-regular fa-clock"></i> ${timeStr}</span></div>
                                 <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
                                 <div class="forum-content" style="white-space: pre-wrap;">${data.content}</div>
@@ -703,6 +740,9 @@
                             </div>
                         `;
                         if(publicList) publicList.innerHTML += postHTML;
+                        
+                        // Cập nhật hàm gọi onclick ở News List trang chủ
+                        if(homeList) homeList.innerHTML += `<div class="news-item" onclick="viewPost('${data.id}')"><div class="news-date">${timeStr} - Đăng bởi: ${data.author}</div><div class="news-title">${data.title}</div></div>`;
                     
                     } else if (data.status === 'pending') {
                         hasPending = true;
@@ -712,6 +752,7 @@
             }
 
             if(!hasApproved && publicList) publicList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào được đăng.</div>';
+            if(!hasApproved && homeList) homeList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào.</div>';
             if(!hasPending && approvalBox) approvalBox.innerHTML = '<div style="text-align:center; color:#10b981; margin-top:50px;"><i class="fa-solid fa-check-circle" style="font-size: 40px; margin-bottom:10px;"></i><br>Mọi thứ đã gọn gàng. Không có bài viết nào chờ duyệt!</div>';
 
             const latestPost = posts.find(p => p.status === 'approved');
@@ -755,7 +796,6 @@
             setTimeout(() => { const list = document.getElementById('comment-list-' + postId); if(list) list.scrollTop = list.scrollHeight; }, 100);
         }
 
-        // === UP BÀI LÊN FORUM ===
         window.openPostModal = function() {
             if (!isUserLoggedIn) { alert("Vui lòng Bấm ĐĂNG NHẬP để Nhập Môn trước khi dùng tính năng này nhé!"); return; }
             const isTeacher = (userRole === 'admin');
@@ -770,24 +810,18 @@
         window.submitPost = async function() {
             const title = document.getElementById('postTitle').value.trim(); const cat = document.getElementById('postCategory').value; const content = document.getElementById('postContent').value.trim();
             if(!title || !content) { alert("Vui lòng điền đủ Tiêu đề và Nội dung!"); return; }
+            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý...";
             
-            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý..."; btn.disabled = true;
-            
-            const postData = {
-                title: title, category: cat, content: content, timestamp: Date.now()
-            };
-
             if (userRole === 'admin') {
-                await push(ref(db, 'posts'), { ...postData, author: currentUserName, authorPhone: "0919935919", status: 'approved' });
+                await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: "0919935919", timestamp: Date.now(), status: 'approved' });
                 alert("Đã đăng bài viết thành công lên Diễn Đàn!");
             } else {
                 const dest = document.querySelector('input[name="postDestination"]:checked').value;
                 if (dest === 'public') {
-                    await push(ref(db, 'posts'), { ...postData, author: currentUserName, authorPhone: currentUserPhone, status: 'pending' });
+                    await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: currentUserPhone, timestamp: Date.now(), status: 'pending' });
                     alert("Đã gửi câu hỏi lên diễn đàn! Vui lòng chờ Thầy duyệt để hiển thị.");
                 } else if (dest === 'private') {
                     const chatRef = ref(db, `messages/${currentUserPhone}`);
-
                     const fullMessage = `
                         <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-left: 4px solid var(--gold); padding: 12px; border-radius: 8px; margin-top: 5px;">
                             <div style="color: var(--gold-light); font-size: 11px; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-folder-open"></i> Yêu cầu tư vấn chuyên sâu: ${cat}</div>
@@ -802,17 +836,16 @@
                     
                     alert("Đã chuyển câu hỏi vào Tin Nhắn Riêng với Thầy Xuân Trường!");
                     document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = ""; document.getElementById('postModal').classList.remove('show');
-                    btn.innerText = "Gửi Câu Hỏi Này"; btn.disabled = false; switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); document.getElementById('btnClientPrivate').click(); return; 
+                    btn.innerText = "Gửi Câu Hỏi Này"; switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); document.getElementById('btnClientPrivate').click(); return; 
                 }
             }
             document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = "";
-            document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này"; btn.disabled = false;
+            document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
         }
 
         window.approvePost = function(postId) { if(confirm("Xác nhận cho phép bài viết này xuất hiện trên trang chủ?")) { update(ref(db, 'posts/' + postId), { status: 'approved' }); } }
         window.deletePost = function(postId) { if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN bài viết này không?")) { remove(ref(db, 'posts/' + postId)); } }
 
-        // === 3. LOGIC CHAT THẦY - KHÁCH ===
         function initAdminLogic() {
             onValue(ref(db, 'users'), (snapshot) => {
                 const div = document.getElementById('dynamicUserList'); div.innerHTML = ''; 
@@ -872,6 +905,7 @@
         }
         window.handleAdminKeyPress = function(e) { if(e.key === 'Enter') window.sendAdminMessage(); }
         window.saveNotes = async function() { if (!currentUserPhone) return; const text = document.getElementById('adminNotes').value; const btn = document.getElementById('saveNotesBtn'); btn.innerText = "Đang lưu..."; await update(ref(db, `users/${currentUserPhone}`), { notes: text }); btn.innerText = "Đã Lưu Xong!"; setTimeout(() => { btn.innerText = "Lưu Ghi Chú"; }, 2000); }
+        
         window.switchClientContact = function(title, el, type) {
             document.querySelectorAll('#clientSection .contact-item').forEach(li => li.classList.remove('active-contact'));
             el.classList.add('active-contact'); document.getElementById('clientChatTitle').innerText = title; document.getElementById('clientChatBox').innerHTML = '';
