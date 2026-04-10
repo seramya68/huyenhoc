@@ -61,7 +61,7 @@
         .hex-btn:hover .hex-inner i { transform: scale(1.2); color: var(--gold-light); text-shadow: 0 0 15px var(--gold-light); }
         .hex-inner span { font-size: 13px; font-weight: bold; text-align: center; text-transform: uppercase; line-height: 1.4; letter-spacing: 1px; }
 
-        /* --- LỤC GIÁC RIÊNG CHO TRANG CHỦ (TỔ ONG MINI) --- */
+        /* --- LỤC GIÁC RIÊNG CHO TRANG CHỦ --- */
         .home-hex-grid { max-width: 700px; margin: 0 auto 40px auto; gap: 15px; }
         .home-hex-grid .hex-btn { width: 90px; height: 100px; animation: none; filter: drop-shadow(0 0 5px rgba(212,175,55,0.2)); }
         .home-hex-grid .hex-inner { width: 86px; height: 96px; }
@@ -84,13 +84,6 @@
         .h-meta { font-size: 11px; color: var(--text-gray); }
 
         /* DANH SÁCH BÀI VIẾT FORUM */
-        .news-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .news-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .news-date { font-size: 12px; color: var(--text-gray); margin-bottom: 5px; }
-        .news-title { font-size: 16px; color: #fff; font-weight: bold; }
-        .news-item:hover { background: rgba(255,255,255,0.05); border-radius: 8px; padding-left: 10px; }
-        .news-item:hover .news-title { color: var(--gold); }
-
         .forum-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .forum-post { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;}
         .forum-post:hover { background: rgba(255,255,255,0.08); }
@@ -98,6 +91,16 @@
         .forum-category { background: rgba(212,175,55,0.2); color: var(--gold); padding: 2px 8px; border-radius: 5px; border: 1px solid var(--gold); font-size: 11px;}
         .forum-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--gold-light);}
         .forum-content { font-size: 14.5px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;}
+
+        /* --- THANH CÔNG CỤ SOẠN THẢO (RICH TEXT EDITOR) --- */
+        .editor-toolbar { display: flex; gap: 8px; background: rgba(0,0,0,0.8); padding: 10px; border: 1px solid rgba(212,175,55,0.4); border-bottom: none; border-radius: 8px 8px 0 0; flex-wrap: wrap; }
+        .editor-toolbar button { background: rgba(255,255,255,0.1); border: none; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; font-size: 14px;}
+        .editor-toolbar button:hover { background: var(--gold); color: #000; }
+        .color-picker-wrap { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px; color: white; border: 1px solid rgba(212,175,55,0.2);}
+        .color-picker-wrap input[type="color"] { width: 20px; height: 20px; padding: 0; border: none; background: transparent; cursor: pointer; }
+        .rich-editor { width: 100%; min-height: 180px; max-height: 300px; padding: 12px; border-radius: 0 0 8px 8px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(0, 0, 0, 0.6); color: #fff; outline: none; box-sizing: border-box; font-family: inherit; overflow-y: auto; line-height: 1.6; font-size: 14px;}
+        .rich-editor:focus { border-color: var(--gold); }
+        .rich-editor:empty:before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; display: block; font-style: italic;}
 
         /* LIKE & COMMENT */
         .forum-actions { display: flex; gap: 25px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
@@ -121,7 +124,7 @@
         .btn-delete { background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
         /* FORM VÀ MODAL */
-        .info-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%); width: 90%; max-width: 600px; max-height: 80vh; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 30px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.4s; z-index: 1000; }
+        .info-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%); width: 90%; max-width: 800px; max-height: 90vh; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 30px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.4s; z-index: 1000; }
         .info-panel.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
         .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
         .close-btn:hover { color: var(--gold); }
@@ -154,9 +157,7 @@
         .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: #1e293b; display: flex; justify-content: center; align-items: center; color: var(--gold); font-size: 16px; }
         .contact-info h5 { margin: 0; font-size: 14px; color: #fff; }
         .contact-info p { margin: 2px 0 0; font-size: 11px; color: #94a3b8; }
-        
         .unread-badge { background: #ef4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
-        
         .filter-group { display: flex; gap: 5px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .filter-btn { flex: 1; padding: 5px; background: rgba(255,255,255,0.05); color: var(--text-gray); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; cursor: pointer; font-size: 12px; transition: 0.3s; }
         .filter-btn.active { background: rgba(212,175,55,0.2); color: var(--gold); border-color: var(--gold); font-weight: bold;}
@@ -182,7 +183,7 @@
 
         footer { text-align: center; padding: 30px 20px; color: var(--text-gray); font-size: 13px; border-top: 1px dashed rgba(212,175,55,0.3); margin-top: auto; letter-spacing: 2px; text-transform: uppercase;}
 
-        /* --- ÉP GIAO DIỆN MOBILE TỐI ƯU CỰC HẠN --- */
+        /* --- ÉP GIAO DIỆN MOBILE TỐI ƯU --- */
         @media (max-width: 768px) {
             .top-nav { flex-direction: column; height: auto; padding: 10px 5px; gap: 8px; align-items: center; }
             .logo-area { width: 100%; justify-content: center; text-align: center; }
@@ -212,6 +213,7 @@
             .form-row { flex-direction: column; gap: 0; }
             .form-group div[style*="display: flex"] { flex-direction: column; gap: 5px !important; }
             .tab-content { padding: 15px 10px; }
+            .editor-toolbar { justify-content: center; }
         }
     </style>
 </head>
@@ -275,11 +277,6 @@
         
         <div id="homeDefaultMessage" style="text-align:center; color: var(--text-gray); margin-top: 30px; font-style: italic;">
             Vui lòng chọn một chuyên mục ở trên để xem các bài viết và câu hỏi mới nhất.
-        </div>
-
-        <div class="section-header" style="margin-top: 60px;"><h2>TIN TỨC CHUNG</h2></div>
-        <div class="news-list" id="homeLatestPosts">
-            <div style="text-align:center; color:#94a3b8;">Đang tải tin tức...</div>
         </div>
     </div>
 
@@ -351,7 +348,22 @@
 
             <div class="form-group">
                 <label id="contentLabel">Nội dung chi tiết:</label>
-                <textarea id="postContent" rows="6" placeholder="Viết nội dung vào đây..."></textarea>
+                
+                <div id="editorToolbar" class="editor-toolbar">
+                    <button type="button" onclick="formatText('bold')" title="In đậm"><i class="fa-solid fa-bold"></i></button>
+                    <button type="button" onclick="formatText('italic')" title="In nghiêng"><i class="fa-solid fa-italic"></i></button>
+                    <button type="button" onclick="formatText('underline')" title="Gạch chân"><i class="fa-solid fa-underline"></i></button>
+                    <div class="color-picker-wrap">
+                        <i class="fa-solid fa-palette"></i> Màu chữ
+                        <input type="color" onchange="formatText('foreColor', this.value)" title="Màu chữ">
+                    </div>
+                    <div class="color-picker-wrap">
+                        <i class="fa-solid fa-highlighter"></i> Đánh dấu
+                        <input type="color" value="#d4af37" onchange="formatText('hiliteColor', this.value)" title="Màu nền (Highlight)">
+                    </div>
+                </div>
+                
+                <div id="postContent" contenteditable="true" class="rich-editor" data-placeholder="Viết nội dung vào đây..."></div>
             </div>
 
             <button class="btn-submit" id="btnSubmitPost" onclick="submitPost()">Gửi</button>
@@ -488,24 +500,22 @@
             }
         }
 
-        // === HÀM XEM BÀI CHI TIẾT ===
+        // === HÀM FORMAT CHỮ CHO BẢNG SOẠN THẢO ===
+        window.formatText = function(command, value = null) {
+            document.execCommand(command, false, value);
+            document.getElementById('postContent').focus();
+        }
+
         window.viewPost = function(postId) {
-            // Chuyển sang Tab Bài Viết/Diễn đàn
             switchMainTab('tab-forum', document.querySelectorAll('.nav-links a')[2]);
-            
-            // Đợi 1 chút cho tab load ra giao diện, rồi cuộn xuống
             setTimeout(() => {
                 const targetPost = document.getElementById('post-' + postId);
                 if (targetPost) {
                     targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Tạo hiệu ứng phát sáng
                     targetPost.style.transition = "all 0.5s ease";
                     targetPost.style.boxShadow = "0 0 40px var(--gold)";
                     targetPost.style.transform = "scale(1.02)";
                     targetPost.style.borderLeft = "8px solid var(--gold)";
-                    
-                    // Tắt hiệu ứng sau 2 giây
                     setTimeout(() => {
                         targetPost.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
                         targetPost.style.transform = "scale(1)";
@@ -565,7 +575,6 @@
         
         window.filterHome = function(category) {
             window.currentHomeCategory = category;
-            
             document.querySelectorAll('.home-hex-grid .hex-btn').forEach(btn => btn.classList.remove('active-cat'));
             const safeId = "hbtn-" + category.replace(/ /g, '-');
             const activeBtn = document.getElementById(safeId);
@@ -579,7 +588,6 @@
             const teacherPosts = catPosts.filter(p => p.author === 'Thầy Xuân Trường').slice(0, 5);
             const userQuestions = catPosts.filter(p => p.author !== 'Thầy Xuân Trường').slice(0, 5);
 
-            // Cập nhật hàm gọi khi click
             const renderMiniList = (list) => {
                 if(list.length === 0) return '<div style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; font-style:italic;">Hiện chưa có nội dung nào.</div>';
                 return list.map(p => `
@@ -673,11 +681,9 @@
         const postsRef = ref(db, 'posts');
         onValue(postsRef, (snapshot) => {
             const publicList = document.getElementById('publicForumList');
-            const homeList = document.getElementById('homeLatestPosts');
             const approvalBox = document.getElementById('adminApprovalBox');
             
             if(publicList) publicList.innerHTML = '';
-            if(homeList) homeList.innerHTML = '';
             if(approvalBox) approvalBox.innerHTML = '';
 
             let hasApproved = false; let hasPending = false; const posts = [];
@@ -725,7 +731,7 @@
                             <div class="forum-post" id="post-${data.id}">
                                 <div class="forum-meta"><span><i class="fa-solid fa-user-pen"></i> ${data.author}</span><span><i class="fa-regular fa-clock"></i> ${timeStr}</span></div>
                                 <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
-                                <div class="forum-content" style="white-space: pre-wrap;">${data.content}</div>
+                                <div class="forum-content">${data.content}</div>
                                 <div class="forum-actions">
                                     <button class="btn-action" style="color: ${likeColor}" onclick="toggleLike('${data.id}')"><i class="${likeIcon}"></i> Thích (${likesCount})</button>
                                     <button class="btn-action" onclick="toggleComment('${data.id}')"><i class="fa-regular fa-comment"></i> Bình luận</button>
@@ -740,19 +746,15 @@
                             </div>
                         `;
                         if(publicList) publicList.innerHTML += postHTML;
-                        
-                        // Cập nhật hàm gọi onclick ở News List trang chủ
-                        if(homeList) homeList.innerHTML += `<div class="news-item" onclick="viewPost('${data.id}')"><div class="news-date">${timeStr} - Đăng bởi: ${data.author}</div><div class="news-title">${data.title}</div></div>`;
                     
                     } else if (data.status === 'pending') {
                         hasPending = true;
-                        if(approvalBox) approvalBox.innerHTML += `<div class="admin-post-card"><div class="forum-meta"><span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span><span>${timeStr}</span></div><div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div><div class="forum-content" style="white-space: pre-wrap;">${data.content}</div><div class="admin-post-actions"><button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button><button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button></div></div>`;
+                        if(approvalBox) approvalBox.innerHTML += `<div class="admin-post-card"><div class="forum-meta"><span><i class="fa-solid fa-user-clock"></i> <b>${data.author}</b> (SĐT: ${data.authorPhone || 'Ẩn'}) chờ duyệt bài</span><span>${timeStr}</span></div><div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div><div class="forum-content">${data.content}</div><div class="admin-post-actions"><button class="btn-approve" onclick="approvePost('${data.id}')"><i class="fa-solid fa-check"></i> Duyệt Hiện Lên</button><button class="btn-delete" onclick="deletePost('${data.id}')"><i class="fa-solid fa-trash-can"></i> Xóa Bỏ</button></div></div>`;
                     }
                 });
             }
 
             if(!hasApproved && publicList) publicList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào được đăng.</div>';
-            if(!hasApproved && homeList) homeList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào.</div>';
             if(!hasPending && approvalBox) approvalBox.innerHTML = '<div style="text-align:center; color:#10b981; margin-top:50px;"><i class="fa-solid fa-check-circle" style="font-size: 40px; margin-bottom:10px;"></i><br>Mọi thứ đã gọn gàng. Không có bài viết nào chờ duyệt!</div>';
 
             const latestPost = posts.find(p => p.status === 'approved');
@@ -805,10 +807,17 @@
             document.getElementById('guestOptions').style.display = isTeacher ? 'none' : 'block';
             document.getElementById('btnSubmitPost').innerText = isTeacher ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
             document.getElementById('postModal').classList.add('show');
+            document.getElementById('postContent').innerHTML = ""; // Xóa trắng khi mở
         }
 
         window.submitPost = async function() {
-            const title = document.getElementById('postTitle').value.trim(); const cat = document.getElementById('postCategory').value; const content = document.getElementById('postContent').value.trim();
+            const title = document.getElementById('postTitle').value.trim(); 
+            const cat = document.getElementById('postCategory').value; 
+            
+            // Đã đổi sang lấy mã HTML từ bảng soạn thảo xịn xò
+            let content = document.getElementById('postContent').innerHTML.trim();
+            if(content === '<br>' || content === '') content = '';
+
             if(!title || !content) { alert("Vui lòng điền đủ Tiêu đề và Nội dung!"); return; }
             const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý...";
             
@@ -835,11 +844,11 @@
                     let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0; update(userRef, { unreadAdmin: count + 1 });
                     
                     alert("Đã chuyển câu hỏi vào Tin Nhắn Riêng với Thầy Xuân Trường!");
-                    document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = ""; document.getElementById('postModal').classList.remove('show');
+                    document.getElementById('postTitle').value = ""; document.getElementById('postContent').innerHTML = ""; document.getElementById('postModal').classList.remove('show');
                     btn.innerText = "Gửi Câu Hỏi Này"; switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); document.getElementById('btnClientPrivate').click(); return; 
                 }
             }
-            document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = "";
+            document.getElementById('postTitle').value = ""; document.getElementById('postContent').innerHTML = "";
             document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
         }
 
@@ -943,7 +952,7 @@
             
             msgEl.innerHTML = `
                 <div style="margin-bottom: 3px;"><strong style="color: ${isTeacher ? 'var(--gold)' : '#fff'}; font-size: 13px; text-transform: uppercase;">${teacherIcon}${msg.user}</strong></div>
-                <div style="color: #e2e8f0; font-size: 15px; word-wrap: break-word; white-space: pre-wrap; line-height: 1.5;">${msg.text}</div>
+                <div style="color: #e2e8f0; font-size: 15px; word-wrap: break-word; line-height: 1.5;">${msg.text}</div>
                 <div style="font-size: 10px; color: #64748b; align-self: flex-end; margin-top: 5px;">${timeString}</div>
             `;
             chatBox.appendChild(msgEl); setTimeout(() => { chatBox.scrollTop = chatBox.scrollHeight; }, 50);
