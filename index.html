@@ -18,7 +18,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #e2e8f0; overflow-x: hidden;
         }
 
-        /* --- THANH THÔNG BÁO CHẠY NGANG (MARQUEE) --- */
+        /* --- THANH THÔNG BÁO --- */
         .marquee-container { width: 100%; background: #000; border-bottom: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 8px 0; overflow: hidden; white-space: nowrap; box-sizing: border-box; position: relative; display: flex; align-items: center; z-index: 101; }
         .marquee-content { display: inline-block; font-size: 13px; font-style: italic; animation: marquee 25s linear infinite; }
         .marquee-content:hover { animation-play-state: paused; }
@@ -26,7 +26,7 @@
         .marquee-content i { color: var(--gold); margin-right: 5px; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* --- NAV CHIA 2 BÊN --- */
+        /* --- NAV --- */
         .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 50px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 175, 55, 0.4); position: sticky; top: 0; z-index: 100; height: 100px; }
         .logo-area { width: 35%; display: flex; align-items: center; justify-content: flex-start; gap: 15px; cursor: pointer; }
         .logo-text { color: var(--gold); font-size: 20px; font-weight: 900; text-transform: uppercase; line-height: 1.2; letter-spacing: 2px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
@@ -42,7 +42,7 @@
         .btn-admin-mode { background: linear-gradient(135deg, #1e293b, #0f172a); color: var(--gold) !important; border: 1px solid var(--gold) !important; pointer-events: none; }
         .nav-slogan { font-size: 13px; color: #ffffff; font-weight: normal; font-style: italic; letter-spacing: 1px; white-space: nowrap; }
 
-        /* --- QUẢN LÝ TAB & LAYOUT CHUNG --- */
+        /* --- QUẢN LÝ TAB & LAYOUT --- */
         .tab-content { display: none; width: 100%; max-width: 1200px; margin: 0 auto; padding: 40px 20px; box-sizing: border-box; min-height: 75vh;}
         .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -50,7 +50,7 @@
         .section-header::before, .section-header::after { content: ""; height: 1px; width: 80px; background: rgba(212, 175, 55, 0.5); }
         .section-header h2 { color: var(--gold); font-size: 26px; text-transform: uppercase; margin: 0; letter-spacing: 3px; text-shadow: 0 0 10px rgba(212,175,55,0.3);}
         
-        /* --- HIỆU ỨNG SÁU CÁNH CỬA --- */
+        /* --- HIỆU ỨNG LỤC GIÁC DÙNG CHUNG --- */
         @keyframes goldPulse { 0% { filter: drop-shadow(0 0 5px rgba(212,175,55,0.3)); } 50% { filter: drop-shadow(0 0 18px rgba(212,175,55,0.7)); } 100% { filter: drop-shadow(0 0 5px rgba(212,175,55,0.3)); } }
         .hexagon-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 50px; padding: 20px 0;}
         .hex-btn { width: 120px; height: 135px; background: var(--gold); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); animation: goldPulse 3s infinite; }
@@ -61,13 +61,29 @@
         .hex-btn:hover .hex-inner i { transform: scale(1.2); color: var(--gold-light); text-shadow: 0 0 15px var(--gold-light); }
         .hex-inner span { font-size: 13px; font-weight: bold; text-align: center; text-transform: uppercase; line-height: 1.4; letter-spacing: 1px; }
 
-        /* DANH SÁCH BÀI VIẾT (FORUM) */
-        .news-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .news-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .news-date { font-size: 12px; color: var(--text-gray); margin-bottom: 5px; }
-        .news-title { font-size: 16px; color: #fff; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .news-title:hover { color: var(--gold); }
+        /* --- LỤC GIÁC RIÊNG CHO TRANG CHỦ (TỔ ONG MINI) --- */
+        .home-hex-grid { max-width: 700px; margin: 0 auto 40px auto; gap: 15px; }
+        .home-hex-grid .hex-btn { width: 90px; height: 100px; animation: none; filter: drop-shadow(0 0 5px rgba(212,175,55,0.2)); }
+        .home-hex-grid .hex-inner { width: 86px; height: 96px; }
+        .home-hex-grid .hex-inner i { font-size: 22px; margin-bottom: 6px; color: var(--text-gray); }
+        .home-hex-grid .hex-inner span { font-size: 10px; color: var(--text-gray); }
+        .home-hex-grid .hex-btn:hover { transform: translateY(-8px) scale(1.1); filter: drop-shadow(0 0 15px rgba(212,175,55,0.8)); }
+        .home-hex-grid .hex-btn:hover .hex-inner i, .home-hex-grid .hex-btn:hover .hex-inner span { color: var(--gold-light); }
+        .home-hex-grid .hex-btn.active-cat { filter: drop-shadow(0 0 20px rgba(212,175,55,1)); transform: scale(1.1); }
+        .home-hex-grid .hex-btn.active-cat .hex-inner { background: rgba(212, 175, 55, 0.2); }
+        .home-hex-grid .hex-btn.active-cat .hex-inner i, .home-hex-grid .hex-btn.active-cat .hex-inner span { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
+        /* KẾT QUẢ LỌC TRANG CHỦ */
+        .home-filter-layout { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .home-filter-col { flex: 1; min-width: 300px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .home-filter-col h3 { text-align: center; margin-top: 0; padding-bottom: 15px; font-size: 16px; letter-spacing: 1px; }
+        .home-post-item { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; border-radius: 8px; }
+        .home-post-item:hover { background: rgba(255,255,255,0.05); cursor: pointer; }
+        .home-post-item:last-child { border-bottom: none; }
+        .h-title { font-weight: bold; color: #fff; font-size: 14px; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .h-meta { font-size: 11px; color: var(--text-gray); }
+
+        /* DANH SÁCH BÀI VIẾT FORUM */
         .forum-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .forum-post { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s;}
         .forum-post:hover { background: rgba(255,255,255,0.08); }
@@ -76,30 +92,28 @@
         .forum-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--gold-light);}
         .forum-content { font-size: 14.5px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap;}
 
-        /* --- CSS MỚI: TÍNH NĂNG LIKE & COMMENT --- */
+        /* LIKE & COMMENT */
         .forum-actions { display: flex; gap: 25px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
         .btn-action { background: transparent; border: none; color: var(--text-gray); font-size: 14px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px; padding: 0; font-weight: bold;}
         .btn-action:hover { color: var(--gold); }
-        
         .comment-section { margin-top: 15px; background: rgba(0,0,0,0.4); border-radius: 8px; padding: 15px; border: 1px solid rgba(212,175,55,0.15); }
         .comment-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; max-height: 250px; overflow-y: auto; padding-right: 5px;}
         .comment-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; font-size: 13.5px; color: #cbd5e1; line-height: 1.5;}
         .teacher-comment { border-left: 3px solid var(--gold); background: rgba(212,175,55,0.15); color: #fff;}
         .comment-author { font-weight: bold; color: var(--gold-light); margin-bottom: 4px; display: flex; align-items: center;}
-        
         .comment-input-area { display: flex; gap: 10px; }
         .comment-input-area input { flex: 1; padding: 10px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.6); color: white; outline: none; font-size: 13px;}
         .comment-input-area input:focus { border-color: var(--gold); }
         .comment-input-area button { background: var(--gold); color: #000; border: none; padding: 0 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s;}
         .comment-input-area button:hover { filter: brightness(1.1); transform: translateY(-1px);}
 
-        /* --- QUẢN LÝ BÀI CHO ADMIN --- */
+        /* QUẢN LÝ BÀI CHO ADMIN */
         .admin-post-card { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; border: 1px dashed var(--gold); margin-bottom: 15px;}
         .admin-post-actions { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;}
         .btn-approve { background: #10b981; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
         .btn-delete { background: #ef4444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-        /* --- CÁC FORM VÀ MODAL --- */
+        /* FORM VÀ MODAL */
         .info-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -40%); width: 90%; max-width: 600px; max-height: 80vh; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 30px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.4s; z-index: 1000; }
         .info-panel.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
         .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
@@ -110,14 +124,13 @@
         .info-content ul { list-style: none; padding-left: 10px; margin: 0; }
         .info-content li { position: relative; padding-left: 20px; margin-bottom: 8px; font-size: 14.5px; line-height: 1.5; color: #e2e8f0; }
         .info-content li::before { content: '•'; position: absolute; left: 0; color: var(--gold); font-size: 18px; }
-        .highlight-box { background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 15px; margin-top: 25px; border-radius: 0 8px 8px 0; color: #fef08a; }
 
         .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 60vh; }
         .login-box { background: var(--glass-bg); border: 1px solid var(--gold); border-radius: 15px; padding: 30px; width: 100%; max-width: 500px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); text-align: center; }
         .login-box h2 { color: var(--gold); margin-top: 0; text-transform: uppercase; border-bottom: 1px dashed rgba(212,175,55,0.3); padding-bottom: 15px; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; color: #cbd5e1; font-size: 13px; margin-bottom: 5px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(0, 0, 0, 0.6); color: #fff; outline: none; box-sizing: border-box; font-family: inherit; }
+        .form-group input[type="text"], .form-group input[type="number"], .form-group input[type="time"], .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(0, 0, 0, 0.6); color: #fff; outline: none; box-sizing: border-box; font-family: inherit; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
         .form-row { display: flex; gap: 15px; } .form-row .form-group { flex: 1; }
         .btn-submit { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #000; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
@@ -134,19 +147,17 @@
         .contact-icon { width: 40px; height: 40px; border-radius: 50%; background: #1e293b; display: flex; justify-content: center; align-items: center; color: var(--gold); font-size: 16px; }
         .contact-info h5 { margin: 0; font-size: 14px; color: #fff; }
         .contact-info p { margin: 2px 0 0; font-size: 11px; color: #94a3b8; }
-        
         .unread-badge { background: #ef4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: auto; display: none; }
-        
         .filter-group { display: flex; gap: 5px; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .filter-btn { flex: 1; padding: 5px; background: rgba(255,255,255,0.05); color: var(--text-gray); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; cursor: pointer; font-size: 12px; transition: 0.3s; }
         .filter-btn.active { background: rgba(212,175,55,0.2); color: var(--gold); border-color: var(--gold); font-weight: bold;}
-
         .chat-main { flex: 1; display: flex; flex-direction: column; }
         .chat-main-header { padding: 15px; border-bottom: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.3); color: var(--gold); font-weight: bold; text-align: center;}
         .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-input-area { padding: 15px; border-top: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.5); display: flex; gap: 10px; }
-        .chat-input { flex: 1; padding: 12px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color: white; outline: none; }
+        .chat-input-area { padding: 15px; border-top: 1px solid rgba(212,175,55,0.1); background: rgba(0,0,0,0.5); display: flex; gap: 10px; align-items: center; }
+        .chat-input { flex: 1; padding: 12px 15px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.3); background: rgba(0,0,0,0.5); color: white; outline: none; font-size: 13px;}
         .chat-input:focus { border-color: var(--gold); }
+        .send-btn { background: var(--gold); color: #000; border: none; padding: 0 20px; height: 40px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; }
 
         .chat-info-sidebar { width: 280px; background: rgba(0,0,0,0.6); border-left: 1px solid rgba(212,175,55,0.2); display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; transition: 0.3s; opacity: 0.5; pointer-events: none;}
         .chat-info-sidebar h4 { color: var(--gold); text-align: center; margin-top: 0; border-bottom: 1px dashed var(--gold); padding-bottom: 10px; font-size: 16px;}
@@ -161,50 +172,35 @@
 
         footer { text-align: center; padding: 30px 20px; color: var(--text-gray); font-size: 13px; border-top: 1px dashed rgba(212,175,55,0.3); margin-top: auto; letter-spacing: 2px; text-transform: uppercase;}
 
-/* --- ÉP GIAO DIỆN MOBILE TỐI ƯU CỰC HẠN --- */
+        /* --- ÉP GIAO DIỆN MOBILE TỐI ƯU CỰC HẠN --- */
         @media (max-width: 768px) {
-            /* Thu gọn Logo và ép nằm giữa */
             .top-nav { flex-direction: column; height: auto; padding: 10px 5px; gap: 8px; align-items: center; }
             .logo-area { width: 100%; justify-content: center; text-align: center; }
             .logo-area img { height: 45px; } 
             .logo-text { font-size: 16px; letter-spacing: 1px; }
             .logo-text .text-huyengia { font-size: 10px; letter-spacing: 2px; }
-            
-            /* ÉP MENU VỪA KHÍT 100% MÀN HÌNH KHÔNG CẦN VUỐT */
             .nav-right-area { width: 100%; align-items: center; }
-            .nav-links { 
-                width: 100%; 
-                justify-content: center; /* Dàn đều ra giữa */
-                gap: 6px; /* Khoảng cách siêu nhỏ */
-                padding-bottom: 5px; 
-                overflow-x: hidden; /* Cấm vuốt ngang */
-                flex-wrap: nowrap; /* Bắt buộc nằm trên 1 dòng */
-            }
-            
-            /* Bóp font chữ của menu bé lại */
+            .nav-links { width: 100%; justify-content: center; gap: 6px; padding-bottom: 5px; overflow-x: hidden; flex-wrap: nowrap; }
             .nav-links a { font-size: 10px; padding-bottom: 2px; letter-spacing: 0; }
             .btn-join { padding: 4px 6px !important; font-size: 10px !important; border-radius: 4px; }
-            
-            /* Ẩn slogan đi cho thoáng màn hình */
             .nav-slogan { display: none; }
-            
-            /* THU NHỎ CHỮ "SÁU CÁNH CỬA" VÀ "MỚI CẬP NHẬT" */
             .section-header { margin-bottom: 30px; gap: 10px; }
             .section-header h2 { font-size: 16px; letter-spacing: 1px; }
-            .section-header::before, .section-header::after { width: 30px; } /* Thu ngắn 2 cái đường gạch ngang 2 bên */
-
-            /* Lục giác co lại gọn gàng */
+            .section-header::before, .section-header::after { width: 30px; } 
+            
             .hexagon-grid { display: grid; grid-template-columns: repeat(2, 1fr); justify-items: center; gap: 10px; padding: 0; }
             .hex-btn { width: 100%; max-width: 130px; height: 135px; }
-            
-            /* Tối ưu khung Chat */
+
+            .home-hex-grid .hex-btn { width: 80px; height: 90px; }
+            .home-hex-grid .hex-inner { width: 76px; height: 86px; }
+            .home-hex-grid .hex-inner i { font-size: 18px; margin-bottom: 4px; }
+            .home-hex-grid .hex-inner span { font-size: 9px; }
+
             .chat-layout { flex-direction: column; height: 80vh; }
             .chat-sidebar, .chat-info-sidebar { width: 100% !important; max-height: 200px; overflow-y: auto; }
             .chat-main { height: 400px; }
             .form-row { flex-direction: column; gap: 0; }
             .form-group div[style*="display: flex"] { flex-direction: column; gap: 5px !important; }
-            
-            /* Thu gọn lề chung */
             .tab-content { padding: 15px 10px; }
         }
     </style>
@@ -241,9 +237,34 @@
     </nav>
 
     <div id="tab-home" class="tab-content active">
-        <div class="section-header"><h2>MỚI CẬP NHẬT</h2></div>
-        <div class="news-list" id="homeLatestPosts">
-            <div style="text-align:center; color:#94a3b8;">Đang tải bài viết mới nhất...</div>
+        <div class="section-header"><h2>CHUYÊN MỤC</h2></div>
+        
+        <div class="hexagon-grid home-hex-grid">
+            <div class="hex-btn" id="hbtn-Phong-Thủy" onclick="filterHome('Phong Thủy')"><div class="hex-inner"><i class="fa-solid fa-compass"></i><span>Phong<br>Thủy</span></div></div>
+            <div class="hex-btn" id="hbtn-Tử-Vi" onclick="filterHome('Tử Vi')"><div class="hex-inner"><i class="fa-solid fa-star-and-crescent"></i><span>Tử<br>Vi</span></div></div>
+            <div class="hex-btn" id="hbtn-Kinh-Dịch" onclick="filterHome('Kinh Dịch')"><div class="hex-inner"><i class="fa-solid fa-yin-yang"></i><span>Kinh<br>Dịch</span></div></div>
+            <div class="hex-btn" id="hbtn-Cảm-Xạ" onclick="filterHome('Cảm Xạ')"><div class="hex-inner"><i class="fa-solid fa-fan"></i><span>Cảm<br>Xạ</span></div></div>
+            <div class="hex-btn" id="hbtn-Cúng-Lễ" onclick="filterHome('Cúng Lễ')"><div class="hex-inner"><i class="fa-solid fa-hands-praying"></i><span>Cúng<br>Lễ</span></div></div>
+            <div class="hex-btn" id="hbtn-Lục-Sự" onclick="filterHome('Lục Sự')"><div class="hex-inner"><i class="fa-solid fa-crystal-ball"></i><span>Lục<br>Sự</span></div></div>
+            <div class="hex-btn" id="hbtn-Khác" onclick="filterHome('Khác')"><div class="hex-inner"><i class="fa-solid fa-layer-group"></i><span>Khác</span></div></div>
+        </div>
+
+        <div id="homeFilteredResult" style="display:none; margin-top: 40px; animation: fadeIn 0.5s ease;">
+            <div class="section-header"><h2 id="homeFilterTitle" style="color: var(--gold-light);">TÌM KIẾM</h2></div>
+            <div class="home-filter-layout">
+                <div class="home-filter-col">
+                    <h3 style="color: var(--gold); border-bottom: 1px dashed var(--gold);"><i class="fa-solid fa-crown"></i> BÀI VIẾT TỪ THẦY</h3>
+                    <div id="homeTeacherPosts"></div>
+                </div>
+                <div class="home-filter-col">
+                    <h3 style="color: #38bdf8; border-bottom: 1px dashed #38bdf8;"><i class="fa-solid fa-users"></i> CÂU HỎI TỪ KHÁCH</h3>
+                    <div id="homeUserQuestions"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="homeDefaultMessage" style="text-align:center; color: var(--text-gray); margin-top: 30px; font-style: italic;">
+            Vui lòng chọn một chuyên mục ở trên để xem các bài viết và câu hỏi mới nhất.
         </div>
     </div>
 
@@ -317,6 +338,7 @@
                 <label id="contentLabel">Nội dung chi tiết:</label>
                 <textarea id="postContent" rows="6" placeholder="Viết nội dung vào đây..."></textarea>
             </div>
+
             <button class="btn-submit" id="btnSubmitPost" onclick="submitPost()">Gửi</button>
         </div>
     </div>
@@ -365,7 +387,7 @@
                 <div id="clientChatBox" class="chat-box"></div>
                 <div class="chat-input-area">
                     <input type="text" id="clientMsgInput" class="chat-input" placeholder="Nhập tin nhắn..." onkeypress="handleClientKeyPress(event)">
-                    <button class="send-btn" onclick="sendClientMessage()">Gửi</button>
+                    <button class="send-btn" id="clientSendBtn" onclick="sendClientMessage()">Gửi</button>
                 </div>
             </div>
         </div>
@@ -392,7 +414,7 @@
                 <div id="adminChatBox" class="chat-box"></div>
                 <div class="chat-input-area" id="adminInputArea">
                     <input type="text" id="adminMsgInput" class="chat-input" placeholder="Nhập tin nhắn tư vấn..." onkeypress="handleAdminKeyPress(event)">
-                    <button class="send-btn" onclick="sendAdminMessage()">Gửi</button>
+                    <button class="send-btn" id="adminSendBtn" onclick="sendAdminMessage()">Gửi</button>
                 </div>
                 <div id="adminApprovalBox" class="chat-box" style="display: none;"></div>
             </div>
@@ -431,6 +453,8 @@
         function closeInfo() { infoPanel.classList.remove('show'); }
 
         let isUserLoggedIn = false; 
+        window.allApprovedPosts = []; // Mảng chứa toàn bộ bài viết đã duyệt
+        window.currentHomeCategory = null;
 
         function switchMainTab(tabId, btnElement) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -449,7 +473,6 @@
             }
         }
 
-        // === LẤY TỈNH THÀNH ===
         const API_URL = "https://provinces.open-api.vn/api";
         window.fetchProvinces = async function() {
             try {
@@ -498,6 +521,40 @@
                 else li.classList.remove('hidden');
             });
         }
+        
+        // BỘ LỌC TRANG CHỦ THEO CHUYÊN MỤC
+        window.filterHome = function(category) {
+            window.currentHomeCategory = category;
+            
+            // Đổi hiệu ứng nút bấm đang chọn
+            document.querySelectorAll('.home-hex-grid .hex-btn').forEach(btn => btn.classList.remove('active-cat'));
+            const safeId = "hbtn-" + category.replace(/ /g, '-');
+            const activeBtn = document.getElementById(safeId);
+            if(activeBtn) activeBtn.classList.add('active-cat');
+
+            document.getElementById('homeDefaultMessage').style.display = 'none';
+            document.getElementById('homeFilteredResult').style.display = 'block';
+            document.getElementById('homeFilterTitle').innerText = "CHUYÊN MỤC: " + category.toUpperCase();
+
+            // Tách làm 2 mảng: Của Thầy và Của Khách, Lấy Top 5
+            const catPosts = window.allApprovedPosts.filter(p => p.category === category);
+            const teacherPosts = catPosts.filter(p => p.author === 'Thầy Xuân Trường').slice(0, 5);
+            const userQuestions = catPosts.filter(p => p.author !== 'Thầy Xuân Trường').slice(0, 5);
+
+            // Cấu trúc HTML
+            const renderMiniList = (list) => {
+                if(list.length === 0) return '<div style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; font-style:italic;">Hiện chưa có nội dung nào.</div>';
+                return list.map(p => `
+                    <div class="home-post-item" onclick="switchMainTab('tab-forum', document.querySelectorAll('.nav-links a')[2])">
+                        <div class="h-title"><i class="fa-solid fa-angle-right" style="color: var(--gold); font-size: 10px; margin-right: 5px;"></i> ${p.title}</div>
+                        <div class="h-meta"><i class="fa-solid fa-pen-nib"></i> ${p.author} &nbsp;|&nbsp; <i class="fa-regular fa-clock"></i> ${new Date(p.timestamp).toLocaleDateString('vi-VN')}</div>
+                    </div>
+                `).join('');
+            };
+
+            document.getElementById('homeTeacherPosts').innerHTML = renderMiniList(teacherPosts);
+            document.getElementById('homeUserQuestions').innerHTML = renderMiniList(userQuestions);
+        }
     </script>
 
     <script type="module">
@@ -509,7 +566,7 @@
             authDomain: "huyenhocxuantruong.firebaseapp.com",
             databaseURL: "https://huyenhocxuantruong-default-rtdb.asia-southeast1.firebasedatabase.app", 
             projectId: "huyenhocxuantruong",
-            storageBucket: "huyenhocxuantruong.firebasestorage.app",
+            storageBucket: "huyenhocxuantruong.firebasestorage.app", 
             messagingSenderId: "236633869056",
             appId: "1:236633869056:web:3ae0a9b083c3cf2e7641e5"
         };
@@ -522,7 +579,7 @@
         let userRole = null; 
         let activeChatRef = null;
         window.openComments = {}; 
-
+        
         // === 1. ĐĂNG NHẬP ===
         window.processLogin = async function() {
             const phone = document.getElementById('phoneInput').value.trim();
@@ -576,15 +633,13 @@
             });
         }
 
-        // === 2. TẢI BÀI VIẾT (CÓ LIKE VÀ COMMENT) ===
+        // === 2. TẢI BÀI VIẾT VÀ FORUM ===
         const postsRef = ref(db, 'posts');
         onValue(postsRef, (snapshot) => {
             const publicList = document.getElementById('publicForumList');
-            const homeList = document.getElementById('homeLatestPosts');
             const approvalBox = document.getElementById('adminApprovalBox');
             
             if(publicList) publicList.innerHTML = '';
-            if(homeList) homeList.innerHTML = '';
             if(approvalBox) approvalBox.innerHTML = '';
 
             let hasApproved = false; let hasPending = false; const posts = [];
@@ -592,9 +647,13 @@
             if (snapshot.exists()) {
                 snapshot.forEach(childSnap => { posts.push({ id: childSnap.key, ...childSnap.val() }); });
                 
+                // Lưu mảng bài viết Approved vào biến toàn cục, sắp xếp mới nhất lên đầu để Trang chủ xài
+                window.allApprovedPosts = posts.filter(p => p.status === 'approved').sort((a,b) => b.timestamp - a.timestamp);
+                if (window.currentHomeCategory) { window.filterHome(window.currentHomeCategory); }
+
                 posts.reverse().forEach(data => {
                     const timeStr = new Date(data.timestamp).toLocaleString('vi-VN');
-                    
+
                     if (data.status === 'approved') {
                         hasApproved = true;
                         let likesCount = data.likes ? Object.keys(data.likes).length : 0;
@@ -617,13 +676,7 @@
                                 let tBadge = isTeacherCmt ? '<i class="fa-solid fa-crown" style="color: var(--gold); margin-right:5px;"></i>' : '';
                                 let cClass = isTeacherCmt ? 'comment-item teacher-comment' : 'comment-item';
                                 let tStr = new Date(c.timestamp).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'}) + ' - ' + new Date(c.timestamp).toLocaleDateString('vi-VN');
-                                
-                                commentsHTML += `
-                                    <div class="${cClass}">
-                                        <div class="comment-author">${tBadge}${c.author} <span style="font-size:10px; color:#64748b; font-weight:normal; margin-left: 5px;">${tStr}</span></div>
-                                        <div style="white-space: pre-wrap;">${c.text}</div>
-                                    </div>
-                                `;
+                                commentsHTML += `<div class="${cClass}"><div class="comment-author">${tBadge}${c.author} <span style="font-size:10px; color:#64748b; font-weight:normal; margin-left: 5px;">${tStr}</span></div><div style="white-space: pre-wrap;">${c.text}</div></div>`;
                             });
                         } else {
                             commentsHTML = '<div style="color: #64748b; font-size: 13px; font-style: italic; text-align: center;">Chưa có bình luận nào. Hãy là người đầu tiên!</div>';
@@ -633,19 +686,12 @@
 
                         const postHTML = `
                             <div class="forum-post">
-                                <div class="forum-meta">
-                                    <span><i class="fa-solid fa-user-pen"></i> ${data.author}</span>
-                                    <span><i class="fa-regular fa-clock"></i> ${timeStr}</span>
-                                </div>
+                                <div class="forum-meta"><span><i class="fa-solid fa-user-pen"></i> ${data.author}</span><span><i class="fa-regular fa-clock"></i> ${timeStr}</span></div>
                                 <div class="forum-title"><span class="forum-category">${data.category}</span> ${data.title}</div>
                                 <div class="forum-content" style="white-space: pre-wrap;">${data.content}</div>
                                 <div class="forum-actions">
-                                    <button class="btn-action" style="color: ${likeColor}" onclick="toggleLike('${data.id}')">
-                                        <i class="${likeIcon}"></i> Thích (${likesCount})
-                                    </button>
-                                    <button class="btn-action" onclick="toggleComment('${data.id}')">
-                                        <i class="fa-regular fa-comment"></i> Bình luận
-                                    </button>
+                                    <button class="btn-action" style="color: ${likeColor}" onclick="toggleLike('${data.id}')"><i class="${likeIcon}"></i> Thích (${likesCount})</button>
+                                    <button class="btn-action" onclick="toggleComment('${data.id}')"><i class="fa-regular fa-comment"></i> Bình luận</button>
                                 </div>
                                 <div class="comment-section" id="comment-sec-${data.id}" style="display: ${displayStyle};">
                                     <div class="comment-list" id="comment-list-${data.id}">${commentsHTML}</div>
@@ -657,7 +703,6 @@
                             </div>
                         `;
                         if(publicList) publicList.innerHTML += postHTML;
-                        if(homeList) homeList.innerHTML += `<div class="news-item"><div class="news-date">${timeStr} - Đăng bởi: ${data.author}</div><div class="news-title">${data.title}</div></div>`;
                     
                     } else if (data.status === 'pending') {
                         hasPending = true;
@@ -667,7 +712,6 @@
             }
 
             if(!hasApproved && publicList) publicList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào được đăng.</div>';
-            if(!hasApproved && homeList) homeList.innerHTML = '<div style="text-align:center; color:#94a3b8;">Chưa có bài viết nào.</div>';
             if(!hasPending && approvalBox) approvalBox.innerHTML = '<div style="text-align:center; color:#10b981; margin-top:50px;"><i class="fa-solid fa-check-circle" style="font-size: 40px; margin-bottom:10px;"></i><br>Mọi thứ đã gọn gàng. Không có bài viết nào chờ duyệt!</div>';
 
             const latestPost = posts.find(p => p.status === 'approved');
@@ -690,7 +734,6 @@
             }
         });
 
-        // HÀM LIKE & COMMENT BÀI VIẾT
         window.toggleLike = async function(postId) {
             if (!isUserLoggedIn) { alert("Vui lòng ĐĂNG NHẬP để Thích bài viết!"); return; }
             let userKey = userRole === 'admin' ? "admin_truong" : currentUserPhone;
@@ -698,28 +741,21 @@
             const snap = await get(likeRef);
             if (snap.exists()) await remove(likeRef); else await set(likeRef, true);
         }
-
         window.toggleComment = function(postId) {
             window.openComments[postId] = !window.openComments[postId];
             const sec = document.getElementById(`comment-sec-${postId}`);
             if (sec) sec.style.display = window.openComments[postId] ? 'block' : 'none';
         }
-
         window.submitComment = async function(postId) {
             if (!isUserLoggedIn) { alert("Vui lòng ĐĂNG NHẬP để Bình luận!"); return; }
-            const input = document.getElementById(`input-cmt-${postId}`);
-            const text = input.value.trim();
-            if (!text) return;
+            const input = document.getElementById(`input-cmt-${postId}`); const text = input.value.trim(); if (!text) return;
             input.value = "Đang gửi..."; input.disabled = true;
-            await push(ref(db, `posts/${postId}/comments`), {
-                author: currentUserName, phone: currentUserPhone || "Thầy Xuân Trường",
-                text: text, timestamp: Date.now()
-            });
+            await push(ref(db, `posts/${postId}/comments`), { author: currentUserName, phone: currentUserPhone || "Thầy Xuân Trường", text: text, timestamp: Date.now() });
             window.openComments[postId] = true;
             setTimeout(() => { const list = document.getElementById('comment-list-' + postId); if(list) list.scrollTop = list.scrollHeight; }, 100);
         }
 
-        // VIẾT BÀI / CÂU HỎI MỚI
+        // === UP BÀI LÊN FORUM ===
         window.openPostModal = function() {
             if (!isUserLoggedIn) { alert("Vui lòng Bấm ĐĂNG NHẬP để Nhập Môn trước khi dùng tính năng này nhé!"); return; }
             const isTeacher = (userRole === 'admin');
@@ -734,20 +770,24 @@
         window.submitPost = async function() {
             const title = document.getElementById('postTitle').value.trim(); const cat = document.getElementById('postCategory').value; const content = document.getElementById('postContent').value.trim();
             if(!title || !content) { alert("Vui lòng điền đủ Tiêu đề và Nội dung!"); return; }
-            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý...";
             
+            const btn = document.getElementById('btnSubmitPost'); btn.innerText = "Đang xử lý..."; btn.disabled = true;
+            
+            const postData = {
+                title: title, category: cat, content: content, timestamp: Date.now()
+            };
+
             if (userRole === 'admin') {
-                await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: "0919935919", timestamp: Date.now(), status: 'approved' });
+                await push(ref(db, 'posts'), { ...postData, author: currentUserName, authorPhone: "0919935919", status: 'approved' });
                 alert("Đã đăng bài viết thành công lên Diễn Đàn!");
             } else {
                 const dest = document.querySelector('input[name="postDestination"]:checked').value;
                 if (dest === 'public') {
-                    await push(ref(db, 'posts'), { title: title, category: cat, content: content, author: currentUserName, authorPhone: currentUserPhone, timestamp: Date.now(), status: 'pending' });
+                    await push(ref(db, 'posts'), { ...postData, author: currentUserName, authorPhone: currentUserPhone, status: 'pending' });
                     alert("Đã gửi câu hỏi lên diễn đàn! Vui lòng chờ Thầy duyệt để hiển thị.");
                 } else if (dest === 'private') {
                     const chatRef = ref(db, `messages/${currentUserPhone}`);
-                    
-                    // GIAO DIỆN TIN NHẮN "HỎI KÍN" ĐƯỢC THIẾT KẾ LẠI CỰC KỲ SANG TRỌNG
+
                     const fullMessage = `
                         <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-left: 4px solid var(--gold); padding: 12px; border-radius: 8px; margin-top: 5px;">
                             <div style="color: var(--gold-light); font-size: 11px; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-folder-open"></i> Yêu cầu tư vấn chuyên sâu: ${cat}</div>
@@ -757,21 +797,16 @@
                     `;
                     
                     await push(chatRef, { user: currentUserName, text: fullMessage, timestamp: Date.now() });
-                    const userRef = ref(db, `users/${currentUserPhone}`);
-                    const snap = await get(userRef);
-                    let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0;
-                    update(userRef, { unreadAdmin: count + 1 });
+                    const userRef = ref(db, `users/${currentUserPhone}`); const snap = await get(userRef);
+                    let count = snap.exists() ? (snap.val().unreadAdmin || 0) : 0; update(userRef, { unreadAdmin: count + 1 });
                     
                     alert("Đã chuyển câu hỏi vào Tin Nhắn Riêng với Thầy Xuân Trường!");
                     document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = ""; document.getElementById('postModal').classList.remove('show');
-                    btn.innerText = "Gửi Câu Hỏi Này"; 
-                    switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); 
-                    document.getElementById('btnClientPrivate').click();
-                    return; 
+                    btn.innerText = "Gửi Câu Hỏi Này"; btn.disabled = false; switchMainTab('tab-chat', document.querySelectorAll('.nav-links a')[3]); document.getElementById('btnClientPrivate').click(); return; 
                 }
             }
             document.getElementById('postTitle').value = ""; document.getElementById('postContent').value = "";
-            document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này";
+            document.getElementById('postModal').classList.remove('show'); btn.innerText = (userRole === 'admin') ? "Đăng Lên Diễn Đàn" : "Gửi Câu Hỏi Này"; btn.disabled = false;
         }
 
         window.approvePost = function(postId) { if(confirm("Xác nhận cho phép bài viết này xuất hiện trên trang chủ?")) { update(ref(db, 'posts/' + postId), { status: 'approved' }); } }
@@ -872,7 +907,6 @@
             const timeString = new Date(msg.timestamp).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
             const teacherIcon = isTeacher ? '<i class="fa-solid fa-crown" style="margin-right: 5px;"></i>' : '';
             
-            // Đã fix lỗi rớt chữ bằng lệnh white-space: pre-wrap; cho dòng nội dung
             msgEl.innerHTML = `
                 <div style="margin-bottom: 3px;"><strong style="color: ${isTeacher ? 'var(--gold)' : '#fff'}; font-size: 13px; text-transform: uppercase;">${teacherIcon}${msg.user}</strong></div>
                 <div style="color: #e2e8f0; font-size: 15px; word-wrap: break-word; white-space: pre-wrap; line-height: 1.5;">${msg.text}</div>
